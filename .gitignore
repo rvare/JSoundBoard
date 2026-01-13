@@ -1,0 +1,6 @@
+classes/
+lib/
+samples/
+*.class
+*.jar
+*.swp
