@@ -14,8 +14,11 @@ public class View extends JFrame implements IView {
 	private JMenu menu;
 	private JMenuItem openPresetOption;
 	private JMenuItem savePresetOption;
+	private JMenuItem addSoundOption;
+	private JMenuItem deleteSoundOption;
 	private JMenuItem docOption;
 	private JMenuItem aboutOption;
+	private JPanel buttonPanel;
 	private GridLayout buttonLayout;
 
 	public View() {
@@ -33,6 +36,15 @@ public class View extends JFrame implements IView {
 		this.savePresetOption = new JMenuItem("Save");
 		fileMenu.add(this.savePresetOption);
 
+		// Create edit menu and its items
+		JMenu editMenu = new JMenu("Edit");
+
+		this.addSoundOption = new JMenuItem("Add Sound");
+		editMenu.add(this.addSoundOption);
+
+		this.deleteSoundOption = new JMenuItem("Delete Sound");
+		editMenu.add(deleteSoundOption);
+
 		// Create help menu and its items
 		JMenu helpMenu = new JMenu("Help");
 
@@ -44,8 +56,25 @@ public class View extends JFrame implements IView {
 
 		// Add all menu items to the menu bar
 		this.menuBar.add(fileMenu);
+		this.menuBar.add(editMenu);
 		this.menuBar.add(helpMenu);
 		this.setJMenuBar(this.menuBar);
+
+		// Create button layout
+		this.buttonPanel = new JPanel();
+		this.buttonLayout = new GridLayout(3, 3);
+		this.buttonPanel.setLayout(this.buttonLayout);
+		this.buttonPanel.add(new JButton("Button 1"));
+		this.buttonPanel.add(new JButton("Button 2"));
+		this.buttonPanel.add(new JButton("Button 3"));
+		this.buttonPanel.add(new JButton("Button 4"));
+		this.buttonPanel.add(new JButton("Button 5"));
+		this.buttonPanel.add(new JButton("Button 6"));
+		this.buttonPanel.add(new JButton("Button 7"));
+		this.buttonPanel.add(new JButton("Button 8"));
+		this.buttonPanel.add(new JButton("Button 9"));
+
+		this.getContentPane().add(BorderLayout.CENTER, this.buttonPanel);
 
 		// Create the frame
 		this.setTitle(this.WINDOW_TITLE);
