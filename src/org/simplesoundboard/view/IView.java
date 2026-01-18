@@ -7,8 +7,8 @@ public interface IView {
 	public static String WINDOW_TITLE = "Simple Sound Board";
 
 	public void showMainFrame();
-	public void addNewSoundListener(Object newSoundButtonListener);
-	public void addDeleteSoundListener(Object deleteSoundButtonListener);
+	public void addNewSoundListener(Object newSoundListener);
+	public void addDeleteSoundListener(Object deleteSoundListener);
 	public void addAboutDialogListener(Object aboutOptionListener);
 	public void addDocumentationListener(Object docOptionListener);
 	public void addSavePresetListener(Object saveOptionListener);

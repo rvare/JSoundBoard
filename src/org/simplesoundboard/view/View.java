@@ -20,6 +20,7 @@ public class View extends JFrame implements IView {
 	private JMenuItem aboutOption;
 	private JPanel buttonPanel;
 	private GridLayout buttonLayout;
+	private static int i = 0;
 
 	public View() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,6 +42,7 @@ public class View extends JFrame implements IView {
 
 		this.addSoundOption = new JMenuItem("Add Sound");
 		editMenu.add(this.addSoundOption);
+		this.addNewSoundListener(new NewSoundListener());
 
 		this.deleteSoundOption = new JMenuItem("Delete Sound");
 		editMenu.add(deleteSoundOption);
@@ -64,15 +66,6 @@ public class View extends JFrame implements IView {
 		this.buttonPanel = new JPanel();
 		this.buttonLayout = new GridLayout(3, 3);
 		this.buttonPanel.setLayout(this.buttonLayout);
-		this.buttonPanel.add(new JButton("Button 1"));
-		this.buttonPanel.add(new JButton("Button 2"));
-		this.buttonPanel.add(new JButton("Button 3"));
-		this.buttonPanel.add(new JButton("Button 4"));
-		this.buttonPanel.add(new JButton("Button 5"));
-		this.buttonPanel.add(new JButton("Button 6"));
-		this.buttonPanel.add(new JButton("Button 7"));
-		this.buttonPanel.add(new JButton("Button 8"));
-		this.buttonPanel.add(new JButton("Button 9"));
 
 		this.getContentPane().add(BorderLayout.CENTER, this.buttonPanel);
 
@@ -85,10 +78,11 @@ public class View extends JFrame implements IView {
 		this.setVisible(true);
 	}
 
-	public void addNewSoundListener(Object newSoundButtonListener) {
+	public void addNewSoundListener(Object newSoundListener) {
+		this.addSoundOption.addActionListener((ActionListener)(newSoundListener));
 	}
 
-	public void addDeleteSoundListener(Object deleteSoundButtonListener) {
+	public void addDeleteSoundListener(Object deleteButtonListener) {
 	}
 
 	public void addAboutDialogListener(Object aboutOptionListener) {
@@ -103,4 +97,15 @@ public class View extends JFrame implements IView {
 	public void addLoadPresetListener(Object loadOptionListener) {
 	}
 
+	// This class will be moved to the Controller later.
+	private class NewSoundListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			JButton soundButton = new JButton(String.format("Button %d", i));
+			buttonPanel.add(soundButton);
+			++i;
+			revalidate();
+			repaint();
+		}
+	}
 }
