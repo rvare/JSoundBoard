@@ -20,10 +20,13 @@ public class View extends JFrame implements IView {
 	private JMenuItem aboutOption;
 	private JPanel buttonPanel;
 	private GridLayout buttonLayout;
-	private static int i = 0;
+
+	private JButton[] buttons;
+	private static int soundButtonCounts = 0;
 
 	public View() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.buttons = new JButton[9];
 
 		// Create menu bar
 		this.menuBar = new JMenuBar();
@@ -46,6 +49,7 @@ public class View extends JFrame implements IView {
 
 		this.deleteSoundOption = new JMenuItem("Delete Sound");
 		editMenu.add(deleteSoundOption);
+		this.addDeleteSoundListener(new DeleteSoundListener());
 
 		// Create help menu and its items
 		JMenu helpMenu = new JMenu("Help");
@@ -82,7 +86,8 @@ public class View extends JFrame implements IView {
 		this.addSoundOption.addActionListener((ActionListener)(newSoundListener));
 	}
 
-	public void addDeleteSoundListener(Object deleteButtonListener) {
+	public void addDeleteSoundListener(Object deleteSoundListener) {
+		this.deleteSoundOption.addActionListener((ActionListener)(deleteSoundListener));
 	}
 
 	public void addAboutDialogListener(Object aboutOptionListener) {
@@ -101,9 +106,22 @@ public class View extends JFrame implements IView {
 	private class NewSoundListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			JButton soundButton = new JButton(String.format("Button %d", i));
+			JButton soundButton = new JButton(String.format("Button %d", soundButtonCounts));
+			buttons[soundButtonCounts] = soundButton;
 			buttonPanel.add(soundButton);
-			++i;
+			++soundButtonCounts;
+			revalidate();
+			repaint();
+		}
+	}
+
+	// This class will be moved to the Controller later.
+	private class DeleteSoundListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			--soundButtonCounts;
+			buttonPanel.remove(buttons[soundButtonCounts]);
+			buttons[soundButtonCounts] = null;
 			revalidate();
 			repaint();
 		}
