@@ -23,7 +23,6 @@ public class DocumentationDialog extends JDialog {
 
 		this.pack();
 		this.setSize(500, 400);
-		// this.setResizable(false);
 		this.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 	}
 }

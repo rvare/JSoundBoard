@@ -84,29 +84,38 @@ public class View extends JFrame implements IView {
 		this.addDocumentationListener(new DocumentationDialogListener());
 	}
 
+	// Operations
+	@Override
 	public void showMainFrame() {
 		this.setVisible(true);
 	}
 
+	// Add listeners
+	@Override
 	public void addNewSoundListener(Object newSoundListener) {
 		this.addSoundOption.addActionListener((ActionListener)(newSoundListener));
 	}
 
+	@Override
 	public void addDeleteSoundListener(Object deleteSoundListener) {
 		this.deleteSoundOption.addActionListener((ActionListener)(deleteSoundListener));
 	}
 
+	@Override
 	public void addAboutDialogListener(Object aboutOptionListener) {
 		this.aboutOption.addActionListener((ActionListener)(aboutOptionListener));
 	}
 
+	@Override
 	public void addDocumentationListener(Object docOptionListener) {
 		this.docOption.addActionListener((ActionListener)(docOptionListener));
 	}
 
+	@Override
 	public void addSavePresetListener(Object saveOptionListener) {
 	}
 
+	@Override
 	public void addLoadPresetListener(Object loadOptionListener) {
 	}
 
