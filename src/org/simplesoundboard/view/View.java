@@ -9,6 +9,9 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
+import org.simplesoundboard.view.AboutDialog;
+import org.simplesoundboard.view.DocumentationDialog;
+
 public class View extends JFrame implements IView {
 	private JMenuBar menuBar;
 	private JMenu menu;
@@ -76,6 +79,9 @@ public class View extends JFrame implements IView {
 		// Create the frame
 		this.setTitle(this.WINDOW_TITLE);
 		this.setSize(this.DEFAULT_WIDTH, this.DEFAULT_HEIGHT);
+
+		this.addAboutDialogListener(new AboutDialogListener());
+		this.addDocumentationListener(new DocumentationDialogListener());
 	}
 
 	public void showMainFrame() {
@@ -91,9 +97,11 @@ public class View extends JFrame implements IView {
 	}
 
 	public void addAboutDialogListener(Object aboutOptionListener) {
+		this.aboutOption.addActionListener((ActionListener)(aboutOptionListener));
 	}
 
 	public void addDocumentationListener(Object docOptionListener) {
+		this.docOption.addActionListener((ActionListener)(docOptionListener));
 	}
 
 	public void addSavePresetListener(Object saveOptionListener) {
@@ -124,6 +132,20 @@ public class View extends JFrame implements IView {
 			buttons[soundButtonCounts] = null;
 			revalidate();
 			repaint();
+		}
+	}
+
+	private class AboutDialogListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			new AboutDialog().setVisible(true);
+		}
+	}
+
+	private class DocumentationDialogListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			new DocumentationDialog().setVisible(true);
 		}
 	}
 }
