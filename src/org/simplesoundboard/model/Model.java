@@ -16,25 +16,32 @@ public class Model {
 	private static short MAX_SOUNDS = 9;
 
 	public Model() {
+		this.subscribers = new ISubscriber[this.MAX_SOUNDS];
 		this.soundCount = 0;
-		this.subscribers = new ISubscriber[9];
 	}
 
 	public void subscribe(ISubscriber subscriber) {
-		if (this.soundCount < this.MAX_SOUNDS-1) {
+		if (this.soundCount < this.MAX_SOUNDS-1)
 			this.subscribers[this.soundCount] = subscriber;
-			++this.soundCount;
-		}
+		++this.soundCount;
 	}
 
 	public void unsubscribe(ISubscriber subscriber) {
-		if (this.soundCount > 0) {
+		if (this.soundCount > 0)
 			this.subscribers[this.soundCount] = null;
-			--this.soundCount;
-		}
+		--this.soundCount;
 	}
 
-	public void notifySubscribers() {
+	public void notifySubscribers(String soundName) {
+		if (this.subscribers.length <= 0)
+			return;
+
+		for (int i = 0; i < this.soundCount; i++) {
+			this.subscribers[i].update(soundName);
+			if (this.subscribers[i].getSoundName().equals(soundName))
+				break;
+		}
+
 	}
 
 	public String loadPreset(String filePreset) {

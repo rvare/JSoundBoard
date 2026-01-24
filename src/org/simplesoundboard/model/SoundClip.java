@@ -28,6 +28,7 @@ public class SoundClip implements ISubscriber {
 	}
 
 	// Getters
+	@Override
 	public String getSoundName() {
 		return this.soundName;
 	}
