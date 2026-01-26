@@ -5,18 +5,18 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import org.simplesoundboard.model.ISubscriber;
+import org.simplesoundboard.model.SoundClip;
 
 public class Model {
 	private File presetFile;
 	private String filePresetPath;
-	private ISubscriber[] subscribers;
+	private SoundClip[] subscribers;
 	private short soundCount;
 
 	public static short MAX_SOUNDS = 9;
 
 	public Model() {
-		this.subscribers = new ISubscriber[this.MAX_SOUNDS];
+		this.subscribers = new SoundClip[this.MAX_SOUNDS];
 		this.soundCount = 0;
 	}
 
@@ -26,13 +26,13 @@ public class Model {
 	}
 
 	// Observer operations
-	public void subscribe(ISubscriber subscriber) {
+	public void subscribe(SoundClip subscriber) {
 		if (this.soundCount < this.MAX_SOUNDS-1)
 			this.subscribers[this.soundCount] = subscriber;
 		++this.soundCount;
 	}
 
-	public void unsubscribe(ISubscriber subscriber) {
+	public void unsubscribe(SoundClip subscriber) {
 		if (this.soundCount > 0)
 			this.subscribers[this.soundCount] = null;
 		--this.soundCount;
