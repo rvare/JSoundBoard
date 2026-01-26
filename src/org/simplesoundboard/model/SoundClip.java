@@ -12,8 +12,6 @@ public class SoundClip implements ISubscriber {
 	private AudioInputStream audioInputStream;
 	private Clip soundClip;
 
-	public SoundClip() {} // Default constructor; does nothing
-
 	public SoundClip(String filePath) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		this.audioInputStream = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
 
@@ -49,7 +47,8 @@ public class SoundClip implements ISubscriber {
 	// Operations
 	@Override
 	public void update(String subscriberName) {
-		if (!subscriberName.equals(this.soundName)) return;
+		if (!subscriberName.equals(this.soundName))
+			return;
 		this.soundClip.setFramePosition(0);
 		this.soundClip.start();
 	}

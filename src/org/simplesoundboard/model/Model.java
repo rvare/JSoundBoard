@@ -13,13 +13,19 @@ public class Model {
 	private ISubscriber[] subscribers;
 	private short soundCount;
 
-	private static short MAX_SOUNDS = 9;
+	public static short MAX_SOUNDS = 9;
 
 	public Model() {
 		this.subscribers = new ISubscriber[this.MAX_SOUNDS];
 		this.soundCount = 0;
 	}
 
+	// Getters
+	public short getSoundCount() {
+		return this.soundCount;
+	}
+
+	// Observer operations
 	public void subscribe(ISubscriber subscriber) {
 		if (this.soundCount < this.MAX_SOUNDS-1)
 			this.subscribers[this.soundCount] = subscriber;
@@ -41,15 +47,18 @@ public class Model {
 			if (this.subscribers[i].getSoundName().equals(soundName))
 				break;
 		}
-
 	}
 
+	// File operations
 	public String loadPreset(String filePreset) {
 		return "";
 	}
 
 	public String savePreset(String filePreset) {
 		return "";
+	}
+
+	public void addSound(String soundFilePath) {
 	}
 }
 
