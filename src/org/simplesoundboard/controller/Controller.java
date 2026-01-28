@@ -29,4 +29,25 @@ public class Controller extends AbsController {
 		// Create button listeners
 
 	}
+
+	// Operations
+	public void saveSoundPresetFile() {
+
+	}
+
+	public void loadSoundPresetFile() {
+
+	}
+
+	public void showAboutDialog() {
+
+	}
+
+	public void showDocumentationDialog() {
+
+	}
+
+	// Menu bar listeners
+
+	// Button listeners
 }

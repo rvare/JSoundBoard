@@ -29,15 +29,15 @@ abstract public class AbsController {
 		return this.iView;
 	}
 
-	// Setters
-
 	// Operations
-	// Abstract methods
-	public void showAboutDialog();
-	public void showDocumentationDialog();
+		// Abstract methods
+	abstract public void saveSoundPresetFile();
+	abstract public void loadSoundPresetFile();
+	abstract public void showAboutDialog();
+	abstract public void showDocumentationDialog();
 
-	// Concrete methods
-		// File operations
+		// Concrete methods
+			// File operations
 	public void loadPresetToModel(String filePresetPath) {
 		this.model.loadPreset(filePresetPath);
 	}
@@ -46,9 +46,14 @@ abstract public class AbsController {
 		this.model.savePreset(filePresetPath);
 	}
 
-		// Sound operations
+			// Sound operations
 	public void addSoundToModel(String soundFilePath) {
-		this.model.subscribe(new SoundClip(soundFilePath, "");
+		try {
+			this.model.subscribe(new SoundClip(soundFilePath, ""));
+		}
+		catch(Exception ex) {
+
+		}
 	}
 
 	public void removeSoundFromModel(SoundClip soundName) {
