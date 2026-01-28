@@ -16,6 +16,7 @@ abstract public class AbsController {
 	protected final IView iView;
 
 	public AbsController(final Model model, final IView iView) {
+		System.out.println("AbsController");
 		this.model = model;
 		this.iView = iView;
 	}

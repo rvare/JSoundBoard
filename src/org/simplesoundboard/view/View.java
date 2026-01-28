@@ -48,11 +48,11 @@ public class View extends JFrame implements IView {
 
 		this.addSoundOption = new JMenuItem("Add Sound");
 		editMenu.add(this.addSoundOption);
-		this.addNewSoundListener(new NewSoundListener());
+		// this.addNewSoundListener(new NewSoundListener());
 
 		this.deleteSoundOption = new JMenuItem("Delete Sound");
 		editMenu.add(deleteSoundOption);
-		this.addDeleteSoundListener(new DeleteSoundListener());
+		// this.addDeleteSoundListener(new DeleteSoundListener());
 
 		// Create help menu and its items
 		JMenu helpMenu = new JMenu("Help");
@@ -80,8 +80,8 @@ public class View extends JFrame implements IView {
 		this.setTitle(this.WINDOW_TITLE);
 		this.setSize(this.DEFAULT_WIDTH, this.DEFAULT_HEIGHT);
 
-		this.addAboutDialogListener(new AboutDialogListener());
-		this.addDocumentationListener(new DocumentationDialogListener());
+		// this.addAboutDialogListener(new AboutDialogListener());
+		// this.addDocumentationListener(new DocumentationDialogListener());
 	}
 
 	// Operations
@@ -113,10 +113,12 @@ public class View extends JFrame implements IView {
 
 	@Override
 	public void addSavePresetListener(Object saveOptionListener) {
+		this.savePresetOption.addActionListener((ActionListener)(saveOptionListener));
 	}
 
 	@Override
 	public void addLoadPresetListener(Object loadOptionListener) {
+		this.openPresetOption.addActionListener((ActionListener)(loadOptionListener));
 	}
 
 	// This class will be moved to the Controller later.

@@ -24,7 +24,14 @@ public class Controller extends AbsController {
 	public Controller(final Model model, final IView iView) {
 		super(model, iView);
 
+		System.out.println("Controller");
 		// Create menu bar listeners
+		this.iView.addNewSoundListener(new AddSoundListener());
+		this.iView.addDeleteSoundListener(new DeleteSoundListener());
+		this.iView.addAboutDialogListener(new AboutListener());
+		this.iView.addDocumentationListener(new DocumentationListener());
+		this.iView.addSavePresetListener(new SaveOptionListener());
+		this.iView.addLoadPresetListener(new LoadOptionListener());
 
 		// Create button listeners
 
@@ -48,6 +55,46 @@ public class Controller extends AbsController {
 	}
 
 	// Menu bar listeners
+	private class LoadOptionListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			System.out.println("Open preset");
+		}
+	}
 
+	private class SaveOptionListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			System.out.println("Save preset");
+		}
+	}
+
+	private class AddSoundListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			System.out.println("Add sound listener");
+		}
+	}
+
+	private class DeleteSoundListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			System.out.println("Delete sound listener");
+		}
+	}
+
+	private class AboutListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			System.out.println("About listener");
+		}
+	}
+
+	private class DocumentationListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			System.out.println("Documentation listener");
+		}
+	}
 	// Button listeners
 }
