@@ -73,6 +73,7 @@ public class Controller extends AbsController {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			System.out.println("Add sound listener");
+			iView.addSoundButton(new SoundButtonListener());
 		}
 	}
 
@@ -80,6 +81,7 @@ public class Controller extends AbsController {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			System.out.println("Delete sound listener");
+			iView.deleteSoundButton();
 		}
 	}
 
@@ -87,6 +89,7 @@ public class Controller extends AbsController {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			System.out.println("About listener");
+			iView.showAboutDialog();
 		}
 	}
 
@@ -94,7 +97,27 @@ public class Controller extends AbsController {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			System.out.println("Documentation listener");
+			iView.showDocumentationDialog();
 		}
 	}
+
 	// Button listeners
+	private class SoundButtonListener implements ActionListener {
+		private String name;
+
+		public SoundButtonListener() { }
+
+		public SoundButtonListener(String name) {
+			this.name = name;
+		}
+
+		public String getName() {
+			return this.name;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			System.out.println("Button pressed");
+		}
+	}
 }

@@ -90,6 +90,38 @@ public class View extends JFrame implements IView {
 		this.setVisible(true);
 	}
 
+	@Override
+	public void showAboutDialog() {
+		new AboutDialog().setVisible(true);
+	}
+
+	@Override
+	public void showDocumentationDialog() {
+		new DocumentationDialog().setVisible(true);
+	}
+
+	@Override
+	public void addSoundButton(Object buttonListener) {
+		if (this.soundButtonCounts == 9) return;
+		JButton soundButton = new JButton(String.format("Button %d", soundButtonCounts));
+		soundButton.addActionListener((ActionListener)(buttonListener));
+		buttons[soundButtonCounts] = soundButton;
+		buttonPanel.add(soundButton);
+		++soundButtonCounts;
+		revalidate();
+		repaint();
+	}
+
+	@Override
+	public void deleteSoundButton() {
+		if (this.soundButtonCounts == 0) return;
+		--soundButtonCounts;
+		buttonPanel.remove(buttons[soundButtonCounts]);
+		buttons[soundButtonCounts] = null;
+		revalidate();
+		repaint();
+	}
+
 	// Add listeners
 	@Override
 	public void addNewSoundListener(Object newSoundListener) {
