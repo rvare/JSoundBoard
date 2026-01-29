@@ -3,7 +3,9 @@ package org.simplesoundboard.view;
 public interface IView {
 	public static short DEFAULT_WIDTH = 400;
 	public static short DEFAULT_HEIGHT = 400;
-	public static short SOUND_COUNT = 9;
+	public static short DEFAULT_SOUND_COUNT = 9;
+	public static short DEFAULT_BUTTON_GRID_HEIGHT = 3;
+	public static short DEFAULT_BUTTON_GRID_WIDTH = 3;
 	public static String WINDOW_TITLE = "Simple Sound Board";
 
 	// Operations

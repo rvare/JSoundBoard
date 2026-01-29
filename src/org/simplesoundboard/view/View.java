@@ -1,7 +1,5 @@
 package org.simplesoundboard.view;
 
-import org.simplesoundboard.view.IView;
-
 import java.util.*;
 import java.io.*;
 import java.awt.*;
@@ -9,8 +7,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-import org.simplesoundboard.view.AboutDialog;
-import org.simplesoundboard.view.DocumentationDialog;
+import org.simplesoundboard.view.*;
 
 public class View extends JFrame implements IView {
 	private JMenuBar menuBar;
@@ -29,7 +26,7 @@ public class View extends JFrame implements IView {
 
 	public View() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.buttons = new JButton[9];
+		this.buttons = new JButton[this.DEFAULT_SOUND_COUNT];
 
 		// Create menu bar
 		this.menuBar = new JMenuBar();
@@ -71,7 +68,8 @@ public class View extends JFrame implements IView {
 
 		// Create button layout
 		this.buttonPanel = new JPanel();
-		this.buttonLayout = new GridLayout(3, 3);
+		this.buttonLayout = new GridLayout(this.DEFAULT_BUTTON_GRID_HEIGHT,
+											this.DEFAULT_BUTTON_GRID_WIDTH);
 		this.buttonPanel.setLayout(this.buttonLayout);
 
 		this.getContentPane().add(BorderLayout.CENTER, this.buttonPanel);
@@ -102,7 +100,7 @@ public class View extends JFrame implements IView {
 
 	@Override
 	public void addSoundButton(Object buttonListener) {
-		if (this.soundButtonCounts == 9) return;
+		if (this.soundButtonCounts == this.DEFAULT_SOUND_COUNT) return;
 		JButton soundButton = new JButton(String.format("Button %d", soundButtonCounts));
 		soundButton.addActionListener((ActionListener)(buttonListener));
 		buttons[soundButtonCounts] = soundButton;
@@ -151,44 +149,5 @@ public class View extends JFrame implements IView {
 	@Override
 	public void addLoadPresetListener(Object loadOptionListener) {
 		this.openPresetOption.addActionListener((ActionListener)(loadOptionListener));
-	}
-
-	// This class will be moved to the Controller later.
-	private class NewSoundListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent event) {
-			JButton soundButton = new JButton(String.format("Button %d", soundButtonCounts));
-			buttons[soundButtonCounts] = soundButton;
-			buttonPanel.add(soundButton);
-			++soundButtonCounts;
-			revalidate();
-			repaint();
-		}
-	}
-
-	// This class will be moved to the Controller later.
-	private class DeleteSoundListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent event) {
-			--soundButtonCounts;
-			buttonPanel.remove(buttons[soundButtonCounts]);
-			buttons[soundButtonCounts] = null;
-			revalidate();
-			repaint();
-		}
-	}
-
-	private class AboutDialogListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent event) {
-			new AboutDialog().setVisible(true);
-		}
-	}
-
-	private class DocumentationDialogListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent event) {
-			new DocumentationDialog().setVisible(true);
-		}
 	}
 }

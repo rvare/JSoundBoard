@@ -73,7 +73,8 @@ public class Controller extends AbsController {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			System.out.println("Add sound listener");
-			iView.addSoundButton(new SoundButtonListener());
+			SoundButtonListener sbListener = new SoundButtonListener();
+			iView.addSoundButton(sbListener);
 		}
 	}
 
