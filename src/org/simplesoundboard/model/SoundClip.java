@@ -21,6 +21,15 @@ public class SoundClip {
 		this.soundName = soundName;
 	}
 
+	public SoundClip(File filePath, String soundName) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+		this.audioInputStream = AudioSystem.getAudioInputStream(filePath.getAbsoluteFile());
+
+		this.soundClip = AudioSystem.getClip();
+		this.soundClip.open(audioInputStream);
+
+		this.soundName = soundName;
+	}
+
 	// Getters
 	public String getSoundName() {
 		return this.soundName;

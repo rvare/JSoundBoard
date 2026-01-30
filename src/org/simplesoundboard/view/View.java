@@ -6,6 +6,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
+import javax.swing.JFileChooser;
+import javax.swing.UIManager;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.simplesoundboard.view.*;
 
@@ -45,11 +48,9 @@ public class View extends JFrame implements IView {
 
 		this.addSoundOption = new JMenuItem("Add Sound");
 		editMenu.add(this.addSoundOption);
-		// this.addNewSoundListener(new NewSoundListener());
 
 		this.deleteSoundOption = new JMenuItem("Delete Sound");
 		editMenu.add(deleteSoundOption);
-		// this.addDeleteSoundListener(new DeleteSoundListener());
 
 		// Create help menu and its items
 		JMenu helpMenu = new JMenu("Help");
@@ -77,9 +78,6 @@ public class View extends JFrame implements IView {
 		// Create the frame
 		this.setTitle(this.WINDOW_TITLE);
 		this.setSize(this.DEFAULT_WIDTH, this.DEFAULT_HEIGHT);
-
-		// this.addAboutDialogListener(new AboutDialogListener());
-		// this.addDocumentationListener(new DocumentationDialogListener());
 	}
 
 	// Operations
@@ -99,9 +97,9 @@ public class View extends JFrame implements IView {
 	}
 
 	@Override
-	public void addSoundButton(Object buttonListener) {
+	public void addSoundButton(Object buttonListener, String soundName) {
 		if (this.soundButtonCounts == this.DEFAULT_SOUND_COUNT) return;
-		JButton soundButton = new JButton(String.format("Button %d", soundButtonCounts));
+		JButton soundButton = new JButton(soundName);
 		soundButton.addActionListener((ActionListener)(buttonListener));
 		buttons[soundButtonCounts] = soundButton;
 		buttonPanel.add(soundButton);
@@ -118,6 +116,33 @@ public class View extends JFrame implements IView {
 		buttons[soundButtonCounts] = null;
 		revalidate();
 		repaint();
+	}
+
+	@Override
+	public String nameSoundButtonDialog() {
+		NameSoundDialog nameSoundDialog = new NameSoundDialog(this);
+		if (nameSoundDialog.getConfirmation() == true)
+			return nameSoundDialog.getTextFieldContent();
+		else
+			return "";
+	}
+
+	@Override
+	public File newSoundFilePath() {
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setAcceptAllFileFilterUsed(false);
+
+		FileNameExtensionFilter wavFilter = new FileNameExtensionFilter("WAV", "wav");
+		fileChooser.addChoosableFileFilter(wavFilter);
+		int fileChooserStatus = fileChooser.showOpenDialog(this);
+
+		if (fileChooserStatus == JFileChooser.CANCEL_OPTION)
+			return null;
+
+		if (fileChooserStatus == JFileChooser.ERROR_OPTION)
+			return null;
+
+		return fileChooser.getSelectedFile();
 	}
 
 	// Add listeners

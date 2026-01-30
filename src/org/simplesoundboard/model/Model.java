@@ -4,6 +4,11 @@ import java.util.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.simplesoundboard.model.SoundClip;
 
@@ -58,7 +63,9 @@ public class Model {
 		return "";
 	}
 
-	public void addSound(String soundFilePath) {
+	public void addSound(File soundFile, String soundName) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+		SoundClip newSoundClip = new SoundClip(soundFile, soundName);
+		this.subscribe(newSoundClip);
 	}
 }
 

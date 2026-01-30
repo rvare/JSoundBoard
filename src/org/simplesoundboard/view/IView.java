@@ -1,19 +1,23 @@
 package org.simplesoundboard.view;
 
+import java.io.*;
+
 public interface IView {
-	public static short DEFAULT_WIDTH = 400;
-	public static short DEFAULT_HEIGHT = 400;
-	public static short DEFAULT_SOUND_COUNT = 9;
-	public static short DEFAULT_BUTTON_GRID_HEIGHT = 3;
-	public static short DEFAULT_BUTTON_GRID_WIDTH = 3;
-	public static String WINDOW_TITLE = "Simple Sound Board";
+	public static final short DEFAULT_WIDTH = 400;
+	public static final short DEFAULT_HEIGHT = 400;
+	public static final short DEFAULT_SOUND_COUNT = 9;
+	public static final short DEFAULT_BUTTON_GRID_HEIGHT = 3;
+	public static final short DEFAULT_BUTTON_GRID_WIDTH = 3;
+	public static final String WINDOW_TITLE = "Simple Sound Board";
 
 	// Operations
 	public void showMainFrame();
-	public void addSoundButton(Object buttonListener);
+	public void addSoundButton(Object buttonListener, String soundName);
 	public void deleteSoundButton();
 	public void showAboutDialog();
 	public void showDocumentationDialog();
+	public String nameSoundButtonDialog();
+	public File newSoundFilePath();
 
 	// Add listeners
 	public void addNewSoundListener(Object newSoundListener);
