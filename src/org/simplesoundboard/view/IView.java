@@ -13,7 +13,7 @@ public interface IView {
 	// Operations
 	public void showMainFrame();
 	public void addSoundButton(Object buttonListener, String soundName);
-	public void deleteSoundButton();
+	public void deleteSoundButton(String soundButtonName);
 	public void showAboutDialog();
 	public void showDocumentationDialog();
 	public String nameSoundButtonDialog();

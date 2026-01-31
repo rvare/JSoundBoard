@@ -109,11 +109,18 @@ public class View extends JFrame implements IView {
 	}
 
 	@Override
-	public void deleteSoundButton() {
+	public void deleteSoundButton(String soundButtonName) {
+		assert soundButtonName != null : "soundButtonName is null";
 		if (this.soundButtonCounts == 0) return;
+		int index = 0;
+		JButton button = this.buttons[0];
+		while (!this.buttons[index].getText().equals(soundButtonName)) {
+			++index;
+			button = this.buttons[index];
+		}
 		--soundButtonCounts;
-		buttonPanel.remove(buttons[soundButtonCounts]);
-		buttons[soundButtonCounts] = null;
+		buttonPanel.remove(button);
+		this.buttons[index] = null;
 		revalidate();
 		repaint();
 	}

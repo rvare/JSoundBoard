@@ -32,9 +32,6 @@ public class Controller extends AbsController {
 		this.iView.addDocumentationListener(new DocumentationListener());
 		this.iView.addSavePresetListener(new SaveOptionListener());
 		this.iView.addLoadPresetListener(new LoadOptionListener());
-
-		// Create button listeners
-
 	}
 
 	// Operations
@@ -100,7 +97,10 @@ public class Controller extends AbsController {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			System.out.println("Delete sound listener");
-			iView.deleteSoundButton();
+			String soundName = iView.nameSoundButtonDialog();
+			iView.deleteSoundButton(soundName);
+			SoundClip soundClip = model.getSelectedSoundClip(soundName);
+			model.unsubscribe(soundClip);
 		}
 	}
 

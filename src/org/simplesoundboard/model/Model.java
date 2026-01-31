@@ -30,27 +30,57 @@ public class Model {
 		return this.soundCount;
 	}
 
+	public SoundClip getSelectedSoundClip(String name) {
+		assert name != null : "getSelectedSoundClip: name is null";
+		assert this.soundCount > 0 : "getSelectedSoundClip: soundCount is < 0";
+		if (this.soundCount == 0)
+			return null;
+
+		for (SoundClip sc : subscribers) {
+			if (sc.getSoundName().equals(name)) {
+				return sc;
+			}
+		}
+
+		return null;
+	}
+
 	// Observer operations
 	public void subscribe(SoundClip subscriber) {
-		if (this.soundCount < this.MAX_SOUNDS-1)
-			this.subscribers[this.soundCount] = subscriber;
-		++this.soundCount;
+		for (int i = 0; i < this.MAX_SOUNDS-1; i++) {
+			if (this.subscribers[i] == null) {
+				this.subscribers[this.soundCount] = subscriber;
+				++this.soundCount;
+				break;
+			}
+		}
 	}
 
 	public void unsubscribe(SoundClip subscriber) {
-		if (this.soundCount > 0)
-			this.subscribers[this.soundCount] = null;
-		--this.soundCount;
+		assert subscriber != null : "subscriber null";
+		assert this.soundCount >= 0 : "soundCount is less than zero";
+		if (this.soundCount == 0)
+			return;
+
+		for (int i = 0; i < this.MAX_SOUNDS; i++) {
+			if (this.subscribers[i] == subscriber) {
+				System.out.println(this.subscribers[i].getSoundName());
+				this.subscribers[i] = null;
+				--this.soundCount;
+			}
+		}
 	}
 
 	public void notifySubscribers(String soundName) {
-		if (this.subscribers.length <= 0)
+		if (this.subscribers.length == 0)
 			return;
 
-		for (int i = 0; i < this.soundCount; i++) {
-			this.subscribers[i].update(soundName);
-			if (this.subscribers[i].getSoundName().equals(soundName))
+		for (int i = 0; i < this.MAX_SOUNDS; i++) {
+			if (this.subscribers[i] != null && this.subscribers[i].getSoundName().equals(soundName)) {
+				System.out.println("Play sound");
+				this.subscribers[i].update(soundName);
 				break;
+			}
 		}
 	}
 
@@ -64,6 +94,7 @@ public class Model {
 	}
 
 	public void addSound(File soundFile, String soundName) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+		if (this.soundCount == this.MAX_SOUNDS) return;
 		SoundClip newSoundClip = new SoundClip(soundFile, soundName);
 		this.subscribe(newSoundClip);
 	}
