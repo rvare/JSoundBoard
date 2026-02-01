@@ -24,12 +24,11 @@ public class View extends JFrame implements IView {
 	private JPanel buttonPanel;
 	private GridLayout buttonLayout;
 
-	private JButton[] buttons;
-	private static int soundButtonCounts = 0;
+	private HashMap<String, JButton> buttons;
 
 	public View() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.buttons = new JButton[this.DEFAULT_SOUND_COUNT];
+		this.buttons = new HashMap<String, JButton>(this.DEFAULT_SOUND_COUNT);
 
 		// Create menu bar
 		this.menuBar = new JMenuBar();
@@ -98,29 +97,29 @@ public class View extends JFrame implements IView {
 
 	@Override
 	public void addSoundButton(Object buttonListener, String soundName) {
-		if (this.soundButtonCounts == this.DEFAULT_SOUND_COUNT) return;
+		assert buttonListener != null : "buttonListener is null";
+		assert soundName != null && !soundName.equals("") : "soundName is null or has no name";
+		if (this.buttons.size() == this.DEFAULT_SOUND_COUNT) return;
+
 		JButton soundButton = new JButton(soundName);
 		soundButton.addActionListener((ActionListener)(buttonListener));
-		buttons[soundButtonCounts] = soundButton;
+
+		this.buttons.put(soundName, soundButton);
+
 		buttonPanel.add(soundButton);
-		++soundButtonCounts;
 		revalidate();
 		repaint();
 	}
 
 	@Override
 	public void deleteSoundButton(String soundButtonName) {
-		assert soundButtonName != null : "soundButtonName is null";
-		if (this.soundButtonCounts == 0) return;
-		int index = 0;
-		JButton button = this.buttons[0];
-		while (!this.buttons[index].getText().equals(soundButtonName)) {
-			++index;
-			button = this.buttons[index];
-		}
-		--soundButtonCounts;
+		assert soundButtonName != null && !soundButtonName.equals("") : "soundButtonName is null or empty";
+		if (this.buttons.size() == 0)
+			return;
+
+		JButton button = this.buttons.get(soundButtonName);
 		buttonPanel.remove(button);
-		this.buttons[index] = null;
+		this.buttons.remove(soundButtonName);
 		revalidate();
 		repaint();
 	}

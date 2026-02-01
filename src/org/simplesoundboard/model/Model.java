@@ -15,73 +15,52 @@ import org.simplesoundboard.model.SoundClip;
 public class Model {
 	private File presetFile;
 	private String filePresetPath;
-	private SoundClip[] subscribers;
-	private short soundCount;
+	private HashMap<String, SoundClip> subscribers;
 
-	public static short MAX_SOUNDS = 9;
+	public static final short MAX_SOUNDS = 9;
 
 	public Model() {
-		this.subscribers = new SoundClip[this.MAX_SOUNDS];
-		this.soundCount = 0;
+		this.subscribers = new HashMap<String, SoundClip>(this.MAX_SOUNDS);
 	}
 
 	// Getters
-	public short getSoundCount() {
-		return this.soundCount;
+	public int getSoundCount() {
+		return this.subscribers.size();
 	}
 
 	public SoundClip getSelectedSoundClip(String name) {
 		assert name != null : "getSelectedSoundClip: name is null";
-		assert this.soundCount > 0 : "getSelectedSoundClip: soundCount is < 0";
-		if (this.soundCount == 0)
+		if (this.subscribers.size() == 0)
 			return null;
 
-		for (SoundClip sc : subscribers) {
-			if (sc.getSoundName().equals(name)) {
-				return sc;
-			}
-		}
+		SoundClip sc = this.subscribers.get(name);
 
-		return null;
+		return sc;
 	}
 
 	// Observer operations
 	public void subscribe(SoundClip subscriber) {
-		for (int i = 0; i < this.MAX_SOUNDS-1; i++) {
-			if (this.subscribers[i] == null) {
-				this.subscribers[this.soundCount] = subscriber;
-				++this.soundCount;
-				break;
-			}
-		}
+		assert subscriber != null : "New subscriber is null";
+		if (this.subscribers.size() == this.MAX_SOUNDS)
+			return;
+
+		this.subscribers.put(subscriber.getSoundName(), subscriber);
 	}
 
 	public void unsubscribe(SoundClip subscriber) {
 		assert subscriber != null : "subscriber null";
-		assert this.soundCount >= 0 : "soundCount is less than zero";
-		if (this.soundCount == 0)
+		if (this.subscribers.size() == 0)
 			return;
 
-		for (int i = 0; i < this.MAX_SOUNDS; i++) {
-			if (this.subscribers[i] == subscriber) {
-				System.out.println(this.subscribers[i].getSoundName());
-				this.subscribers[i] = null;
-				--this.soundCount;
-			}
-		}
+		this.subscribers.remove(subscriber.getSoundName());
 	}
 
 	public void notifySubscribers(String soundName) {
-		if (this.subscribers.length == 0)
+		if (this.subscribers.size() == 0)
 			return;
 
-		for (int i = 0; i < this.MAX_SOUNDS; i++) {
-			if (this.subscribers[i] != null && this.subscribers[i].getSoundName().equals(soundName)) {
-				System.out.println("Play sound");
-				this.subscribers[i].update(soundName);
-				break;
-			}
-		}
+		System.out.println("Play sound");
+		this.subscribers.get(soundName).update(soundName);
 	}
 
 	// File operations
@@ -94,7 +73,7 @@ public class Model {
 	}
 
 	public void addSound(File soundFile, String soundName) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-		if (this.soundCount == this.MAX_SOUNDS) return;
+		if (this.subscribers.size() == (int)this.MAX_SOUNDS) return;
 		SoundClip newSoundClip = new SoundClip(soundFile, soundName);
 		this.subscribe(newSoundClip);
 	}

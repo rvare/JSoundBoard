@@ -61,4 +61,9 @@ public class SoundClip {
 	public void stopSound() {
 		this.soundClip.stop();
 	}
+
+	@Override
+	public String toString() {
+		return this.soundName;
+	}
 }
