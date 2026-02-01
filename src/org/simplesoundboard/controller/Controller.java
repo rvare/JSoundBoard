@@ -83,6 +83,15 @@ public class Controller extends AbsController {
 			try {
 				model.addSound(newSound, soundName);
 			}
+			catch(UnsupportedAudioFileException ex) {
+				System.out.println(ex.getMessage());
+			}
+			catch(LineUnavailableException ex) {
+				System.out.println(ex.getMessage());
+			}
+			catch(IOException ex) {
+				System.out.println(ex.getMessage());
+			}
 			catch(Exception ex) {
 				System.out.println(ex.getMessage());
 			}

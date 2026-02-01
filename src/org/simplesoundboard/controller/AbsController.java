@@ -53,7 +53,7 @@ abstract public class AbsController {
 			this.model.subscribe(new SoundClip(soundFilePath, ""));
 		}
 		catch(Exception ex) {
-
+			System.out.println(ex.getMessage());
 		}
 	}
 
