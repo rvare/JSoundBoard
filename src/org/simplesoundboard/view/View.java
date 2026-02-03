@@ -11,6 +11,7 @@ import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.simplesoundboard.view.*;
+import org.simplesoundboard.exception.*;
 
 public class View extends JFrame implements IView {
 	private JMenuBar menuBar;
@@ -112,12 +113,14 @@ public class View extends JFrame implements IView {
 	}
 
 	@Override
-	public void deleteSoundButton(String soundButtonName) {
+	public void deleteSoundButton(String soundButtonName) throws NoSoundException {
 		assert soundButtonName != null && !soundButtonName.equals("") : "soundButtonName is null or empty";
 		if (this.buttons.size() == 0)
 			return;
 
 		JButton button = this.buttons.get(soundButtonName);
+		if (button == null)
+			throw new NoSoundException("Sound not found");
 		buttonPanel.remove(button);
 		this.buttons.remove(soundButtonName);
 		revalidate();
@@ -149,6 +152,10 @@ public class View extends JFrame implements IView {
 			return null;
 
 		return fileChooser.getSelectedFile();
+	}
+
+	@Override
+	public void showErrorDialog(String errorMessage) {
 	}
 
 	// Add listeners

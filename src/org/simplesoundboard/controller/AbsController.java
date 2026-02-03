@@ -10,6 +10,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.simplesoundboard.model.*;
 import org.simplesoundboard.view.*;
+import org.simplesoundboard.exception.*;
 
 abstract public class AbsController {
 	protected final Model model;
@@ -57,7 +58,7 @@ abstract public class AbsController {
 		}
 	}
 
-	public void removeSoundFromModel(SoundClip soundName) {
+	public void removeSoundFromModel(SoundClip soundName) throws NoSoundException {
 		this.model.unsubscribe(soundName);
 	}
 

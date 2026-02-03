@@ -19,6 +19,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import org.simplesoundboard.model.*;
 import org.simplesoundboard.view.*;
 import org.simplesoundboard.controller.AbsController;
+import org.simplesoundboard.exception.*;
 
 public class Controller extends AbsController {
 	public Controller(final Model model, final IView iView) {
@@ -82,23 +83,30 @@ public class Controller extends AbsController {
 
 			try {
 				model.addSound(newSound, soundName);
+				SoundButtonListener sbListener = new SoundButtonListener(soundName);
+				iView.addSoundButton(sbListener, soundName);
 			}
 			catch(UnsupportedAudioFileException ex) {
 				System.out.println(ex.getMessage());
+				return;
 			}
 			catch(LineUnavailableException ex) {
 				System.out.println(ex.getMessage());
+				return;
 			}
 			catch(IOException ex) {
+				System.out.println(ex.getMessage());
+				return;
+			}
+			catch(SoundNameConflictException ex) {
 				System.out.println(ex.getMessage());
 			}
 			catch(Exception ex) {
 				System.out.println(ex.getMessage());
+				return;
 			}
 
 			System.out.println(soundName);
-			SoundButtonListener sbListener = new SoundButtonListener(soundName);
-			iView.addSoundButton(sbListener, soundName);
 		}
 	}
 
@@ -107,9 +115,17 @@ public class Controller extends AbsController {
 		public void actionPerformed(ActionEvent event) {
 			System.out.println("Delete sound listener");
 			String soundName = iView.nameSoundButtonDialog();
-			iView.deleteSoundButton(soundName);
-			SoundClip soundClip = model.getSelectedSoundClip(soundName);
-			model.unsubscribe(soundClip);
+			try {
+				iView.deleteSoundButton(soundName);
+				SoundClip soundClip = model.getSelectedSoundClip(soundName);
+				model.unsubscribe(soundClip);
+			}
+			catch(NoSoundException noSoundEx) {
+				System.out.println(noSoundEx.getMessage());
+			}
+			catch(Exception ex) {
+				System.out.println(ex.getMessage());
+			}
 		}
 	}
 

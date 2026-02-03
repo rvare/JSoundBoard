@@ -11,6 +11,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.simplesoundboard.model.SoundClip;
+import org.simplesoundboard.exception.*;
 
 public class Model {
 	private File presetFile;
@@ -39,18 +40,24 @@ public class Model {
 	}
 
 	// Observer operations
-	public void subscribe(SoundClip subscriber) {
+	public void subscribe(SoundClip subscriber) throws SoundNameConflictException {
 		assert subscriber != null : "New subscriber is null";
 		if (this.subscribers.size() == this.MAX_SOUNDS)
 			return;
 
+		if (this.subscribers.containsKey(subscriber.getSoundName()))
+			throw new SoundNameConflictException("Sound already exists");
+
 		this.subscribers.put(subscriber.getSoundName(), subscriber);
 	}
 
-	public void unsubscribe(SoundClip subscriber) {
+	public void unsubscribe(SoundClip subscriber) throws NoSoundException {
 		assert subscriber != null : "subscriber null";
 		if (this.subscribers.size() == 0)
 			return;
+
+		if (this.subscribers.containsKey(subscriber.getSoundName()))
+			throw new NoSoundException("No sound found");
 
 		this.subscribers.remove(subscriber.getSoundName());
 	}
@@ -72,7 +79,7 @@ public class Model {
 		return "";
 	}
 
-	public void addSound(File soundFile, String soundName) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+	public void addSound(File soundFile, String soundName) throws UnsupportedAudioFileException, IOException, LineUnavailableException, SoundNameConflictException {
 		if (this.subscribers.size() == (int)this.MAX_SOUNDS) return;
 		SoundClip newSoundClip = new SoundClip(soundFile, soundName);
 		this.subscribe(newSoundClip);
