@@ -97,10 +97,13 @@ public class View extends JFrame implements IView {
 	}
 
 	@Override
-	public void addSoundButton(Object buttonListener, String soundName) {
+	public void addSoundButton(Object buttonListener, String soundName) throws SoundNameConflictException {
 		assert buttonListener != null : "buttonListener is null";
 		assert soundName != null && !soundName.equals("") : "soundName is null or has no name";
 		if (this.buttons.size() == this.DEFAULT_SOUND_COUNT) return;
+
+		if (this.buttons.containsKey(soundName))
+			throw new SoundNameConflictException("Name already used for button.");
 
 		JButton soundButton = new JButton(soundName);
 		soundButton.addActionListener((ActionListener)(buttonListener));
@@ -156,6 +159,7 @@ public class View extends JFrame implements IView {
 
 	@Override
 	public void showErrorDialog(String errorMessage) {
+		JOptionPane.showMessageDialog(this, errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	// Add listeners

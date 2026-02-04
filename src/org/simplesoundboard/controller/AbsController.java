@@ -17,6 +17,8 @@ abstract public class AbsController {
 	protected final IView iView;
 
 	public AbsController(final Model model, final IView iView) {
+		assert mode != null : "Model is null.";
+		assert iView != null : "iView is null.";
 		System.out.println("AbsController");
 		this.model = model;
 		this.iView = iView;
@@ -41,15 +43,18 @@ abstract public class AbsController {
 		// Concrete methods
 			// File operations
 	public void loadPresetToModel(String filePresetPath) {
+		assert !filePresetPath.equals("") && filePresetPath != null : "soundName is empty string or null.";
 		this.model.loadPreset(filePresetPath);
 	}
 
 	public void savePresetFromModel(String filePresetPath) {
+		assert !filePresetPath.equals("") && filePresetPath != null : "soundName is empty string or null.";
 		this.model.savePreset(filePresetPath);
 	}
 
 			// Sound operations
 	public void addSoundToModel(String soundFilePath) {
+		assert soundFilePath != null : "soundFilePath is null";
 		try {
 			this.model.subscribe(new SoundClip(soundFilePath, ""));
 		}
@@ -58,11 +63,13 @@ abstract public class AbsController {
 		}
 	}
 
-	public void removeSoundFromModel(SoundClip soundName) throws NoSoundException {
-		this.model.unsubscribe(soundName);
+	public void removeSoundFromModel(SoundClip soundClip) throws NoSoundException {
+		assert soundClip != null : "soundClip is null.";
+		this.model.unsubscribe(soundClip);
 	}
 
 	public void playSoundClip(String soundName) {
+		assert !soundName.equals("") && soundName != null : "soundName is empty string or null.";
 		this.model.notifySubscribers(soundName);
 	}
 }

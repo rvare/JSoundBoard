@@ -14,7 +14,7 @@ public interface IView {
 
 	// Operations
 	public void showMainFrame();
-	public void addSoundButton(Object buttonListener, String soundName);
+	public void addSoundButton(Object buttonListener, String soundName) throws SoundNameConflictException;
 	public void deleteSoundButton(String soundButtonName) throws NoSoundException;
 	public void showAboutDialog();
 	public void showDocumentationDialog();

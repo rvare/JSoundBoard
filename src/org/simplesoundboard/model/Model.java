@@ -29,12 +29,14 @@ public class Model {
 		return this.subscribers.size();
 	}
 
-	public SoundClip getSelectedSoundClip(String name) {
+	public SoundClip getSelectedSoundClip(String name) throws NoSoundException {
 		assert name != null : "getSelectedSoundClip: name is null";
 		if (this.subscribers.size() == 0)
 			return null;
 
 		SoundClip sc = this.subscribers.get(name);
+		if (sc == null)
+			throw new NoSoundException("Sound does not exist.");
 
 		return sc;
 	}
@@ -80,7 +82,8 @@ public class Model {
 	}
 
 	public void addSound(File soundFile, String soundName) throws UnsupportedAudioFileException, IOException, LineUnavailableException, SoundNameConflictException {
-		if (this.subscribers.size() == (int)this.MAX_SOUNDS) return;
+		if (this.subscribers.size() == (int)this.MAX_SOUNDS)
+			return;
 		SoundClip newSoundClip = new SoundClip(soundFile, soundName);
 		this.subscribe(newSoundClip);
 	}

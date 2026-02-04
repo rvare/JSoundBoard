@@ -88,25 +88,24 @@ public class Controller extends AbsController {
 			}
 			catch(UnsupportedAudioFileException ex) {
 				System.out.println(ex.getMessage());
-				return;
+				iView.showErrorDialog("Unsupported file format.\nMust be wav.");
 			}
 			catch(LineUnavailableException ex) {
 				System.out.println(ex.getMessage());
-				return;
-			}
-			catch(IOException ex) {
-				System.out.println(ex.getMessage());
-				return;
+				iView.showErrorDialog(ex.getMessage());
 			}
 			catch(SoundNameConflictException ex) {
 				System.out.println(ex.getMessage());
+				iView.showErrorDialog(ex.getMessage());
+			}
+			catch(IOException ex) {
+				System.out.println(ex.getMessage());
+				iView.showErrorDialog(ex.getMessage());
 			}
 			catch(Exception ex) {
 				System.out.println(ex.getMessage());
-				return;
+				iView.showErrorDialog(ex.getMessage());
 			}
-
-			System.out.println(soundName);
 		}
 	}
 
@@ -122,9 +121,11 @@ public class Controller extends AbsController {
 			}
 			catch(NoSoundException noSoundEx) {
 				System.out.println(noSoundEx.getMessage());
+				iView.showErrorDialog(noSoundEx.getMessage());
 			}
 			catch(Exception ex) {
 				System.out.println(ex.getMessage());
+				iView.showErrorDialog(ex.getMessage());
 			}
 		}
 	}
