@@ -21,7 +21,7 @@ public class Model {
 	public static final short MAX_SOUNDS = 9;
 
 	public Model() {
-		this.subscribers = new HashMap<String, SoundClip>(this.MAX_SOUNDS);
+		this.subscribers = new HashMap<String, SoundClip>(Model.MAX_SOUNDS);
 	}
 
 	// Getters
@@ -44,7 +44,7 @@ public class Model {
 	// Observer operations
 	public void subscribe(SoundClip subscriber) throws SoundNameConflictException {
 		assert subscriber != null : "New subscriber is null";
-		if (this.subscribers.size() == this.MAX_SOUNDS)
+		if (this.subscribers.size() == Model.MAX_SOUNDS)
 			return;
 
 		if (this.subscribers.containsKey(subscriber.getSoundName()))
@@ -82,7 +82,7 @@ public class Model {
 	}
 
 	public void addSound(File soundFile, String soundName) throws UnsupportedAudioFileException, IOException, LineUnavailableException, SoundNameConflictException {
-		if (this.subscribers.size() == (int)this.MAX_SOUNDS)
+		if (this.subscribers.size() == (int)Model.MAX_SOUNDS)
 			return;
 		SoundClip newSoundClip = new SoundClip(soundFile, soundName);
 		this.subscribe(newSoundClip);

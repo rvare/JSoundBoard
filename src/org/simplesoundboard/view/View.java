@@ -28,8 +28,8 @@ public class View extends JFrame implements IView {
 	private HashMap<String, JButton> buttons;
 
 	public View() {
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.buttons = new HashMap<String, JButton>(this.DEFAULT_SOUND_COUNT);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.buttons = new HashMap<String, JButton>(IView.DEFAULT_SOUND_COUNT);
 
 		// Create menu bar
 		this.menuBar = new JMenuBar();
@@ -69,15 +69,15 @@ public class View extends JFrame implements IView {
 
 		// Create button layout
 		this.buttonPanel = new JPanel();
-		this.buttonLayout = new GridLayout(this.DEFAULT_BUTTON_GRID_HEIGHT,
-											this.DEFAULT_BUTTON_GRID_WIDTH);
+		this.buttonLayout = new GridLayout(IView.DEFAULT_BUTTON_GRID_HEIGHT,
+											IView.DEFAULT_BUTTON_GRID_WIDTH);
 		this.buttonPanel.setLayout(this.buttonLayout);
 
 		this.getContentPane().add(BorderLayout.CENTER, this.buttonPanel);
 
 		// Create the frame
-		this.setTitle(this.WINDOW_TITLE);
-		this.setSize(this.DEFAULT_WIDTH, this.DEFAULT_HEIGHT);
+		this.setTitle(IView.WINDOW_TITLE);
+		this.setSize(IView.DEFAULT_WIDTH, IView.DEFAULT_HEIGHT);
 	}
 
 	// Operations
@@ -100,7 +100,7 @@ public class View extends JFrame implements IView {
 	public void addSoundButton(Object buttonListener, String soundName) throws SoundNameConflictException {
 		assert buttonListener != null : "buttonListener is null";
 		assert soundName != null && !soundName.equals("") : "soundName is null or has no name";
-		if (this.buttons.size() == this.DEFAULT_SOUND_COUNT) return;
+		if (this.buttons.size() == IView.DEFAULT_SOUND_COUNT) return;
 
 		if (this.buttons.containsKey(soundName))
 			throw new SoundNameConflictException("Name already used for button.");

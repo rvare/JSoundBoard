@@ -17,7 +17,7 @@ abstract public class AbsController {
 	protected final IView iView;
 
 	public AbsController(final Model model, final IView iView) {
-		assert mode != null : "Model is null.";
+		assert model != null : "Model is null.";
 		assert iView != null : "iView is null.";
 		System.out.println("AbsController");
 		this.model = model;

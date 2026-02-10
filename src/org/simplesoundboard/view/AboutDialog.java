@@ -15,13 +15,13 @@ public class AboutDialog extends JDialog {
 	public AboutDialog() {
 		this.setTitle("About");
 
-		JLabel appTitleLabel = new JLabel(this.applicationTitle);
+		JLabel appTitleLabel = new JLabel(AboutDialog.applicationTitle);
 		appTitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-		JLabel authorCopyrightLabel = new JLabel(this.authorAndCopyright);
+		JLabel authorCopyrightLabel = new JLabel(AboutDialog.authorAndCopyright);
 		authorCopyrightLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-		JLabel versionNumberLabel = new JLabel(this.versionNumber);
+		JLabel versionNumberLabel = new JLabel(AboutDialog.versionNumber);
 		versionNumberLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		JPanel panel = new JPanel();
@@ -34,7 +34,7 @@ public class AboutDialog extends JDialog {
 		this.getContentPane().add(BorderLayout.CENTER, panel);
 
 		this.pack();
-		this.setSize(this.DEAFULT_WIDTH, this.DEAFULT_HEIGHT);
+		this.setSize(AboutDialog.DEAFULT_WIDTH, AboutDialog.DEAFULT_HEIGHT);
 		this.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 	}
 }

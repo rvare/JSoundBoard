@@ -14,7 +14,6 @@ public class NameSoundDialog extends JDialog {
 	private boolean confirmation;
 
 	public NameSoundDialog(final JFrame mainFrame) {
-		assert mainFrame != null : "mainFrame is null";
 		super(mainFrame);
 
 		this.confirmation = false;
