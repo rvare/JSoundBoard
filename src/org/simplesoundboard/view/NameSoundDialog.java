@@ -5,7 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-public class NameSoundDialog extends JDialog {
+public final class NameSoundDialog extends JDialog {
 	private static final short DEFAULT_WIDTH = 250;
 	private static final short DEFAULT_HEIGHT = 150;
 	private static final short TEXT_FIELD_COLUMNS = 20;
@@ -20,7 +20,7 @@ public class NameSoundDialog extends JDialog {
 
 		JLabel promptLabel = new JLabel("Enter name for sound");
 
-		this.textField = new JTextField(this.TEXT_FIELD_COLUMNS);
+		this.textField = new JTextField(NameSoundDialog.TEXT_FIELD_COLUMNS);
 
 		JPanel namePanel = new JPanel();
 		namePanel.add(promptLabel);
@@ -38,7 +38,7 @@ public class NameSoundDialog extends JDialog {
 		this.getContentPane().add(BorderLayout.SOUTH, buttonPanel);
 
 		this.pack();
-		this.setSize(this.DEFAULT_WIDTH, this.DEFAULT_HEIGHT);
+		this.setSize(NameSoundDialog.DEFAULT_WIDTH, NameSoundDialog.DEFAULT_HEIGHT);
 		this.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 		this.setVisible(true);
 	}

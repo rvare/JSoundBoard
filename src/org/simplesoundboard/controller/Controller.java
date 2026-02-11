@@ -21,7 +21,7 @@ import org.simplesoundboard.view.*;
 import org.simplesoundboard.controller.AbsController;
 import org.simplesoundboard.exception.*;
 
-public class Controller extends AbsController {
+public final class Controller extends AbsController {
 	public Controller(final Model model, final IView iView) {
 		super(model, iView);
 

@@ -13,7 +13,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.simplesoundboard.view.*;
 import org.simplesoundboard.exception.*;
 
-public class View extends JFrame implements IView {
+public final class View extends JFrame implements IView {
 	private JMenuBar menuBar;
 	private JMenu menu;
 	private JMenuItem openPresetOption;
@@ -28,7 +28,6 @@ public class View extends JFrame implements IView {
 	private HashMap<String, JButton> buttons;
 
 	public View() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.buttons = new HashMap<String, JButton>(IView.DEFAULT_SOUND_COUNT);
 
 		// Create menu bar
@@ -76,6 +75,7 @@ public class View extends JFrame implements IView {
 		this.getContentPane().add(BorderLayout.CENTER, this.buttonPanel);
 
 		// Create the frame
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(IView.WINDOW_TITLE);
 		this.setSize(IView.DEFAULT_WIDTH, IView.DEFAULT_HEIGHT);
 	}

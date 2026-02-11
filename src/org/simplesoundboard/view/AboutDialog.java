@@ -5,7 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-public class AboutDialog extends JDialog {
+public final class AboutDialog extends JDialog {
 	private static short DEAFULT_WIDTH = 250;
 	private static short DEAFULT_HEIGHT = 150;
 	private static String applicationTitle = "Simple Sound Board";

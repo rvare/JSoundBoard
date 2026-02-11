@@ -13,7 +13,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import org.simplesoundboard.model.SoundClip;
 import org.simplesoundboard.exception.*;
 
-public class Model {
+public final class Model {
 	private File presetFile;
 	private String filePresetPath;
 	private HashMap<String, SoundClip> subscribers;

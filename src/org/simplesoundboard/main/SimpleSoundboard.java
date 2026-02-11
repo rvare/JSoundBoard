@@ -8,7 +8,7 @@ import org.simplesoundboard.view.*;
 import org.simplesoundboard.model.*;
 import org.simplesoundboard.controller.*;
 
-public class SimpleSoundBoard {
+public final class SimpleSoundBoard {
 	public static void main(String[] args) {
 		View view = new View();
 		Model model = new Model();

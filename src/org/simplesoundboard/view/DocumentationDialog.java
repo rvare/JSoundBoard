@@ -5,7 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-public class DocumentationDialog extends JDialog {
+public final class DocumentationDialog extends JDialog {
 	public DocumentationDialog() {
 		this.setTitle("Documentation");
 
