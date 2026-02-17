@@ -13,6 +13,11 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import org.simplesoundboard.model.SoundClip;
 import org.simplesoundboard.exception.*;
 
+/**
+ * The Model of the MVC architecture.
+ * @author Richard Varela
+ * @since 1.0
+ */
 public final class Model {
 	private File presetFile;
 	private String filePresetPath;
@@ -20,15 +25,31 @@ public final class Model {
 
 	public static final short MAX_SOUNDS = 9;
 
+	/**
+	 * Main contructor of the Model class.
+ 	 * @since 1.0
+	 */
 	public Model() {
 		this.subscribers = new HashMap<String, SoundClip>(Model.MAX_SOUNDS);
 	}
 
 	// Getters
+	/**
+	 * Returns the count of how many subscribers are currently in the Model.
+	 * @return Returns the number of current subscribers.
+ 	 * @since 1.0
+	 */
 	public int getSoundCount() {
 		return this.subscribers.size();
 	}
 
+	/**
+	 * Gets a specific sound clip by using a string.
+	 * @param name String that represents the name of the sound.
+	 * @return Returns a SoundClip object that corresponds to the String in name.
+	 * @throws NoSoundException When no sound corresponding to name is found, this exception is thrown.
+ 	 * @since 1.0
+	 */
 	public SoundClip getSelectedSoundClip(String name) throws NoSoundException {
 		assert name != null : "getSelectedSoundClip: name is null";
 		if (this.subscribers.size() == 0)
@@ -42,6 +63,12 @@ public final class Model {
 	}
 
 	// Observer operations
+	/**
+	 * Notifies current subscribers in the Model.
+	 * @param subscriber A SoundClip object that is a new subscriber to be added to the Model.
+	 * @throws SoundNameConflictException When there is a sound with the same name already in the model, this is thrown.
+ 	 * @since 1.0
+	 */
 	public void subscribe(SoundClip subscriber) throws SoundNameConflictException {
 		assert subscriber != null : "New subscriber is null";
 		if (this.subscribers.size() == Model.MAX_SOUNDS)
@@ -53,6 +80,12 @@ public final class Model {
 		this.subscribers.put(subscriber.getSoundName(), subscriber);
 	}
 
+	/**
+	 * Removes a subscriber in the model.
+	 * @param subscriber A SoundClip object that represents the subscriber to remove.
+	 * @throws NoSoundException When there is no sound in the Model, this is thrown.
+ 	 * @since 1.0
+	 */
 	public void unsubscribe(SoundClip subscriber) throws NoSoundException {
 		assert subscriber != null : "subscriber null";
 		if (this.subscribers.size() == 0)
@@ -64,6 +97,11 @@ public final class Model {
 		this.subscribers.remove(subscriber.getSoundName());
 	}
 
+	/**
+	 * Notifies the subscriber that has the sound we want to play.
+	 * @param soundName A String object that has the name of the sound we want to play.
+ 	 * @since 1.0
+	 */
 	public void notifySubscribers(String soundName) {
 		if (this.subscribers.size() == 0)
 			return;
@@ -73,14 +111,36 @@ public final class Model {
 	}
 
 	// File operations
+	/**
+	 * Opens a text file that contains several directory paths to several audio files and loads them in for the user.
+	 * @param filePreset A String object that contains the path to the file that will be used to create a File object.
+	 * @return A string that is the path.
+ 	 * @since 1.0
+	 */
 	public String loadPreset(String filePreset) {
 		return "";
 	}
 
+	/**
+	 * Saves the directory path of the currently loaded sounds, allowing the user to easily load all audio files without doing it manually.
+	 * @param filePreset A String object that contains the path to the file that will be used to create a File object.
+	 * @return A string that is the path.
+ 	 * @since 1.0
+	 */
 	public String savePreset(String filePreset) {
 		return "";
 	}
 
+	/**
+	 * Creates a new SoundClip and adds it as a subscriber to the model.
+	 * @param soundFile String object that contains the path to the audio file that is used to open the file.
+	 * @param soundName The name of the sound the user created to identify the sound and name its corresponding button in the View class.
+	 * @throws UnsupportedAudioFileException Thrown when user tries to load an audio file that's not compitable with the Clip class.
+	 * @throws IOException Thrown when there is an issue with the file.
+	 * @throws LineUnavailableException Thrown when the JVM is unable to create an InputLineStream.
+	 * @throws SoundNameConflictException Thrown when the new name of the sound is already in use by another sound.
+ 	 * @since 1.0
+	 */
 	public void addSound(File soundFile, String soundName) throws UnsupportedAudioFileException, IOException, LineUnavailableException, SoundNameConflictException {
 		if (this.subscribers.size() == (int)Model.MAX_SOUNDS)
 			return;
