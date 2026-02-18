@@ -5,6 +5,10 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
+/**
+ * Displays a dialog window with information about the application, author, and license information.
+ * @author Richard Varela
+ */
 public final class AboutDialog extends JDialog {
 	private static short DEAFULT_WIDTH = 250;
 	private static short DEAFULT_HEIGHT = 150;
@@ -12,6 +16,9 @@ public final class AboutDialog extends JDialog {
 	private static String authorAndCopyright = "Copyright 2026 REV";
 	private static String versionNumber = "v1.0";
 
+	/**
+	 * Default constructor that creates the entire dialog.
+	 */
 	public AboutDialog() {
 		this.setTitle("About");
 

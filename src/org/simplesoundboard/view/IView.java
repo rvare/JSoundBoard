@@ -4,6 +4,10 @@ import java.io.*;
 
 import org.simplesoundboard.exception.*;
 
+/**
+ * Interface that makes it easy for any user to alter View but forces to commit the "contract" that the Controller needs to function.
+ * @author Richard Varela
+ */
 public interface IView {
 	public static final short DEFAULT_WIDTH = 400;
 	public static final short DEFAULT_HEIGHT = 400;

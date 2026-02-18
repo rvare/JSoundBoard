@@ -13,6 +13,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.simplesoundboard.view.*;
 import org.simplesoundboard.exception.*;
 
+/**
+ * Class that implements the IView interface and should extend from whatever graphics library is being used.
+ * @author Richard Varela
+ */
 public final class View extends JFrame implements IView {
 	private JMenuBar menuBar;
 	private JMenu menu;
@@ -27,6 +31,9 @@ public final class View extends JFrame implements IView {
 
 	private HashMap<String, JButton> buttons;
 
+	/**
+	 * Default constructor.
+	 */
 	public View() {
 		this.buttons = new HashMap<String, JButton>(IView.DEFAULT_SOUND_COUNT);
 

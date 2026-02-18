@@ -5,7 +5,14 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
+/**
+ * Displays brief documentation on how to use the application.
+ * @author Richard Varela
+ */
 public final class DocumentationDialog extends JDialog {
+	/**
+	 * Default constructor that creates the entire window.
+	 */
 	public DocumentationDialog() {
 		this.setTitle("Documentation");
 

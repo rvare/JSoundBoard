@@ -5,6 +5,10 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
+/**
+ * Represents the GUI dialog to name a sound when a new one is loaded.
+ * @author Richard Varela
+ */
 public final class NameSoundDialog extends JDialog {
 	private static final short DEFAULT_WIDTH = 250;
 	private static final short DEFAULT_HEIGHT = 150;
@@ -13,6 +17,10 @@ public final class NameSoundDialog extends JDialog {
 	private String soundName;
 	private boolean confirmation;
 
+	/**
+	 * Default constructor.
+	 * @param mainFrame A JFrame that is the main frame of the application, as in, the View class.
+	 */
 	public NameSoundDialog(final JFrame mainFrame) {
 		super(mainFrame);
 
@@ -44,15 +52,27 @@ public final class NameSoundDialog extends JDialog {
 	}
 
 	// Getters
+	/**
+	 * Getter that retrieves the name the user typed.
+	 * @return A String object that contains the name the user inputed in the dialog.
+	 */
 	public String getTextFieldContent() {
 		return this.textField.getText();
 	}
 
+	/**
+	 * Getter that retrieves the user's confirmation.
+	 * @return Returns a boolean. It'll return true if the user clicks 'OK', false for 'Cancel'.
+	 */
 	public boolean getConfirmation() {
 		return this.confirmation;
 	}
 
 	// Internal classes
+	/**
+	 * Private class that acts as a listener for the 'OK' button.
+	 * @author Richard Varela
+	 */
 	private class okButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
@@ -61,6 +81,10 @@ public final class NameSoundDialog extends JDialog {
 		}
 	}
 
+	/**
+	 * Private class that acts as a listener for the 'Cancel' button.
+	 * @author Richard Varela
+	 */
 	private class cancelButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
