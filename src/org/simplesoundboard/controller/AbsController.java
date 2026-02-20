@@ -12,10 +12,19 @@ import org.simplesoundboard.model.*;
 import org.simplesoundboard.view.*;
 import org.simplesoundboard.exception.*;
 
+/**
+ * Abstract Controller class that is extended by a contrete Controller class.
+ * @author Richard Varela
+ */
 abstract public class AbsController {
 	protected final Model model;
 	protected final IView iView;
 
+	/**
+	 * Default constructor used to instantiate the controller. Preconditions: a valid Model and iView object must be instantiated first.
+	 * @param model A reference to the Model object.
+	 * @param iView A reference to an object that implements the IView interface.
+	 */
 	public AbsController(final Model model, final IView iView) {
 		assert model != null : "Model is null.";
 		assert iView != null : "iView is null.";
@@ -25,10 +34,18 @@ abstract public class AbsController {
 	}
 
 	// Getters
+	/**
+	 * Used to retrieve a reference to the Model class.
+	 * @return Returns a reference to the model class.
+	 */
 	public Model getModel() {
 		return this.model;
 	}
 
+	/**
+	 * Used to retrieve a reference to the View class.
+	 * @return Returns a reference to the View class.
+	 */
 	public IView getIView() {
 		return this.iView;
 	}
@@ -37,22 +54,42 @@ abstract public class AbsController {
 		// Abstract methods
 	abstract public void saveSoundPresetFile();
 	abstract public void loadSoundPresetFile();
+
+	/**
+	 * Used to call the showAboutDialog method of the IView interface.
+	 */
 	abstract public void showAboutDialog();
+
+	/**
+	 * Used to call the showDocumentationDialog method of the IView interface.
+	 */
 	abstract public void showDocumentationDialog();
 
 		// Concrete methods
 			// File operations
+	/**
+	 * Calls the Model's load preset method when the user opens a preset file.
+	 * @param filePresetPath A String object that represents the path to the preset file.
+	 */
 	public void loadPresetToModel(String filePresetPath) {
 		assert !filePresetPath.equals("") && filePresetPath != null : "soundName is empty string or null.";
 		this.model.loadPreset(filePresetPath);
 	}
 
+	/**
+	 * Calls the Model's save preset method when the user opens a preset file.
+	 * @param filePresetPath A String object that represents the path that the preset file will be saved to.
+	 */
 	public void savePresetFromModel(String filePresetPath) {
 		assert !filePresetPath.equals("") && filePresetPath != null : "soundName is empty string or null.";
 		this.model.savePreset(filePresetPath);
 	}
 
 			// Sound operations
+	/**
+	 * Calls the Model's subscribe method to add a new sound to the model.
+	 * @param soundFilePath A String object that represent the path to the audio to be used.
+	 */
 	public void addSoundToModel(String soundFilePath) {
 		assert soundFilePath != null : "soundFilePath is null";
 		try {
@@ -63,11 +100,19 @@ abstract public class AbsController {
 		}
 	}
 
+	/**
+	 * Calls the Model's removeSoundFromModel method to remove a sound from the model.
+	 * @param soundClip A reference to the SoundClip object that is to be removed.
+	 */
 	public void removeSoundFromModel(SoundClip soundClip) throws NoSoundException {
 		assert soundClip != null : "soundClip is null.";
 		this.model.unsubscribe(soundClip);
 	}
 
+	/**
+	 * Calls the Model's notifySubscribers to play the sound that corresponds to the button the user pressed.
+	 * @param soundName A String object that represents the name of the sound to be deleted.
+	 */
 	public void playSoundClip(String soundName) {
 		assert !soundName.equals("") && soundName != null : "soundName is empty string or null.";
 		this.model.notifySubscribers(soundName);

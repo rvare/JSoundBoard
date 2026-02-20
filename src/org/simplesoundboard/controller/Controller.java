@@ -22,6 +22,12 @@ import org.simplesoundboard.controller.AbsController;
 import org.simplesoundboard.exception.*;
 
 public final class Controller extends AbsController {
+	/**
+	 * Default constructor that also calls the AbsController constructor.
+	 * Preconditions: A valid Model and object that implements IView interface must be instantiated first.
+	 * @param model A reference to the Model object.
+	 * @param iView A reference to an object that implements the IView interface.
+	 */
 	public Controller(final Model model, final IView iView) {
 		super(model, iView);
 
@@ -53,6 +59,10 @@ public final class Controller extends AbsController {
 	}
 
 	// Menu bar listeners
+	/**
+	 * Private internal class that implements the ActionListener interface that listens for when the user loads a preset file.
+	 * @author Richard Varela
+	 */
 	private class LoadOptionListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
@@ -60,6 +70,10 @@ public final class Controller extends AbsController {
 		}
 	}
 
+	/**
+	 * Private internal class that implements the ActionListener interface that listens for when the user saves a preset file.
+	 * @author Richard Varela
+	 */
 	private class SaveOptionListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
@@ -67,6 +81,10 @@ public final class Controller extends AbsController {
 		}
 	}
 
+	/**
+	 * Internal private class that implements the ActionListener interface that listens for when the users wants to add a new sound.
+	 * @author Richard Varela
+	 */
 	private class AddSoundListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
@@ -109,6 +127,10 @@ public final class Controller extends AbsController {
 		}
 	}
 
+	/**
+	 * Internal private class that implements the ActionListener interface that listens for when the user wants to delete a sound.
+	 * @author Richard Varela
+	 */
 	private class DeleteSoundListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
@@ -130,6 +152,10 @@ public final class Controller extends AbsController {
 		}
 	}
 
+	/**
+	 * Internal private class that implements the ActionListener interface that listens for when the user opens the About Dialog.
+	 * @author Richard Varela
+	 */
 	private class AboutListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
@@ -138,6 +164,10 @@ public final class Controller extends AbsController {
 		}
 	}
 
+	/**
+	 * Internal private class that implements the ActionListener interface that listens for when the user opens the Docs Dialog.
+	 * @author Richard Varela
+	 */
 	private class DocumentationListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
@@ -147,6 +177,11 @@ public final class Controller extends AbsController {
 	}
 
 	// Button listener
+	/**
+	 * Internal private class that implements the ActionListener interface.
+	 * This class is responsible for handling the case that the user clicks a JButton to play a sound.
+	 * @author Richard Varela
+	 */
 	private class SoundButtonListener implements ActionListener {
 		private String name;
 
