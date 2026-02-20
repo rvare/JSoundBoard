@@ -50,12 +50,13 @@ public final class Model {
 	 * @throws NoSoundException When no sound corresponding to name is found, this exception is thrown.
  	 * @since 1.0
 	 */
-	public SoundClip getSelectedSoundClip(String name) throws NoSoundException {
+	public SoundClip getSelectedSoundClip(String soundName) throws NoSoundException {
 		assert name != null : "getSelectedSoundClip: name is null";
+
 		if (this.subscribers.size() == 0)
 			return null;
 
-		SoundClip sc = this.subscribers.get(name);
+		SoundClip sc = this.subscribers.get(soundName);
 		if (sc == null)
 			throw new NoSoundException("Sound does not exist.");
 
@@ -71,7 +72,9 @@ public final class Model {
 	 */
 	public void subscribe(SoundClip subscriber) throws SoundNameConflictException {
 		assert subscriber != null : "New subscriber is null";
+
 		if (this.subscribers.size() == Model.MAX_SOUNDS)
+			// TODO: Throw an error when max number of sounds has been met.
 			return;
 
 		if (this.subscribers.containsKey(subscriber.getSoundName()))
@@ -88,6 +91,8 @@ public final class Model {
 	 */
 	public void unsubscribe(SoundClip subscriber) throws NoSoundException {
 		assert subscriber != null : "subscriber null";
+		assert this.subscribers.size() >= 0 : "Number of subscribers is negative";
+
 		if (this.subscribers.size() == 0)
 			return;
 
@@ -103,10 +108,11 @@ public final class Model {
  	 * @since 1.0
 	 */
 	public void notifySubscribers(String soundName) {
+		assert soundName != null : "soundName is null";
+
 		if (this.subscribers.size() == 0)
 			return;
 
-		System.out.println("Play sound");
 		this.subscribers.get(soundName).update(soundName);
 	}
 
@@ -114,21 +120,19 @@ public final class Model {
 	/**
 	 * Opens a text file that contains several directory paths to several audio files and loads them in for the user.
 	 * @param filePreset A String object that contains the path to the file that will be used to create a File object.
-	 * @return A string that is the path.
  	 * @since 1.0
 	 */
-	public String loadPreset(String filePreset) {
-		return "";
+	public void loadPreset(String filePreset) {
+		assert filePreset != null : "filePreset is null";
 	}
 
 	/**
 	 * Saves the directory path of the currently loaded sounds, allowing the user to easily load all audio files without doing it manually.
 	 * @param filePreset A String object that contains the path to the file that will be used to create a File object.
-	 * @return A string that is the path.
  	 * @since 1.0
 	 */
-	public String savePreset(String filePreset) {
-		return "";
+	public void savePreset(String filePreset) {
+		assert filePreset != null : "filePreset is null";
 	}
 
 	/**
@@ -141,9 +145,15 @@ public final class Model {
 	 * @throws SoundNameConflictException Thrown when the new name of the sound is already in use by another sound.
  	 * @since 1.0
 	 */
-	public void addSound(File soundFile, String soundName) throws UnsupportedAudioFileException, IOException, LineUnavailableException, SoundNameConflictException {
+	public void addSound(File soundFile, String soundName)
+		throws UnsupportedAudioFileException, IOException, LineUnavailableException, SoundNameConflictException
+	{
+		assert soundFile != null : "soundFile is null";
+		assert soundName != null : "soundName is null";
+
 		if (this.subscribers.size() == (int)Model.MAX_SOUNDS)
 			return;
+
 		SoundClip newSoundClip = new SoundClip(soundFile, soundName);
 		this.subscribe(newSoundClip);
 	}

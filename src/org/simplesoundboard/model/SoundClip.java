@@ -26,7 +26,12 @@ public class SoundClip {
 	 * @throws LineUnavailableException Thrown when unable to create an InputLineStream.
  	 * @since 1.0
 	 */
-	public SoundClip(File filePath, String soundName) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+	public SoundClip(File filePath, String soundName)
+		throws UnsupportedAudioFileException, IOException, LineUnavailableException
+	{
+		assert filePath != null : "filePath is null";
+		assert soundName != null : "soundName is null";
+
 		this.audioInputStream = AudioSystem.getAudioInputStream(filePath.getAbsoluteFile());
 
 		this.soundClip = AudioSystem.getClip();
@@ -45,6 +50,9 @@ public class SoundClip {
  	 * @since 1.0
 	 */
 	public SoundClip(String filePath, String soundName) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+		assert filePath != null : "filePath is null";
+		assert soundName != null : "soundName is null";
+
 		this(new File(filePath), soundName);
 	}
 
@@ -83,6 +91,8 @@ public class SoundClip {
  	 * @since 1.0
 	 */
 	public void setSoundClipName(String soundName) {
+		assert soundName != null : "soundName is null";
+
 		this.soundName = soundName;
 	}
 
@@ -93,6 +103,8 @@ public class SoundClip {
  	 * @since 1.0
 	 */
 	public void update(String subscriberName) {
+		assert subscriberName != null : "subscriberName is null";
+
 		if (!subscriberName.equals(this.soundName))
 			return;
 

@@ -4,13 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-import org.simplesoundboard.view.*;
-import org.simplesoundboard.model.*;
-import org.simplesoundboard.controller.*;
+import org.simplesoundboard.view.View;
+import org.simplesoundboard.model.Model;
+import org.simplesoundboard.controller.Controller;
 
 /**
  * The Main entry point of the application.
- * Here, the View, Model, and Controller are instantiated for use, and ends with the main frame being shown.
+ * The View, Model, and Controller are instantiated for use, and ends with the main frame being shown.
  * @author Richard Varela
  */
 public final class SimpleSoundBoard {
