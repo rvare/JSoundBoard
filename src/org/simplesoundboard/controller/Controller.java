@@ -31,7 +31,6 @@ public final class Controller extends AbsController {
 	public Controller(final Model model, final IView iView) {
 		super(model, iView);
 
-		System.out.println("Controller");
 		// Create menu bar listeners
 		this.iView.addNewSoundListener(new AddSoundListener());
 		this.iView.addDeleteSoundListener(new DeleteSoundListener());
@@ -88,7 +87,6 @@ public final class Controller extends AbsController {
 	private class AddSoundListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			System.out.println("Add sound listener");
 			File newSound = iView.newSoundFilePath();
 
 			if (newSound == null)
@@ -105,23 +103,23 @@ public final class Controller extends AbsController {
 				iView.addSoundButton(sbListener, soundName);
 			}
 			catch(UnsupportedAudioFileException ex) {
-				System.out.println(ex.getMessage());
+				// System.out.println(ex.getMessage());
 				iView.showErrorDialog("Unsupported file format.\nMust be wav.");
 			}
 			catch(LineUnavailableException ex) {
-				System.out.println(ex.getMessage());
+				// System.out.println(ex.getMessage());
 				iView.showErrorDialog(ex.getMessage());
 			}
 			catch(SoundNameConflictException ex) {
-				System.out.println(ex.getMessage());
+				// System.out.println(ex.getMessage());
 				iView.showErrorDialog(ex.getMessage());
 			}
 			catch(IOException ex) {
-				System.out.println(ex.getMessage());
+				// System.out.println(ex.getMessage());
 				iView.showErrorDialog(ex.getMessage());
 			}
 			catch(Exception ex) {
-				System.out.println(ex.getMessage());
+				// System.out.println(ex.getMessage());
 				iView.showErrorDialog(ex.getMessage());
 			}
 		}
@@ -134,19 +132,19 @@ public final class Controller extends AbsController {
 	private class DeleteSoundListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			System.out.println("Delete sound listener");
 			String soundName = iView.nameSoundButtonDialog();
+
 			try {
 				iView.deleteSoundButton(soundName);
 				SoundClip soundClip = model.getSelectedSoundClip(soundName);
 				model.unsubscribe(soundClip);
 			}
 			catch(NoSoundException noSoundEx) {
-				System.out.println(noSoundEx.getMessage());
+				// System.out.println(noSoundEx.getMessage());
 				iView.showErrorDialog(noSoundEx.getMessage());
 			}
 			catch(Exception ex) {
-				System.out.println(ex.getMessage());
+				// System.out.println(ex.getMessage());
 				iView.showErrorDialog(ex.getMessage());
 			}
 		}
@@ -159,7 +157,6 @@ public final class Controller extends AbsController {
 	private class AboutListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			System.out.println("About listener");
 			iView.showAboutDialog();
 		}
 	}
@@ -171,7 +168,6 @@ public final class Controller extends AbsController {
 	private class DocumentationListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			System.out.println("Documentation listener");
 			iView.showDocumentationDialog();
 		}
 	}
@@ -185,11 +181,9 @@ public final class Controller extends AbsController {
 	private class SoundButtonListener implements ActionListener {
 		private String name;
 
-		public SoundButtonListener() {
-			System.out.println("SoundButtonListener constructor");
-		}
+		public SoundButtonListener() {} // Default constructor
 
-		public SoundButtonListener(String name) {
+		public SoundButtonListener(final String name) {
 			this.name = name;
 		}
 
@@ -197,9 +191,12 @@ public final class Controller extends AbsController {
 			return this.name;
 		}
 
+		public void setName(final String name) {
+			this.name = name;
+		}
+
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			System.out.println("Button pressed");
 			model.notifySubscribers(this.name);
 		}
 	}

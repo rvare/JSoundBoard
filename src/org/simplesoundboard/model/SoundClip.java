@@ -1,6 +1,7 @@
 package org.simplesoundboard.model;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -15,7 +16,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class SoundClip {
 	private String soundName;
 	private AudioInputStream audioInputStream;
-	private Clip soundClip;
+	private Clip clip;
 
 	/**
 	 * Default constructor to use.
@@ -26,7 +27,7 @@ public class SoundClip {
 	 * @throws LineUnavailableException Thrown when unable to create an InputLineStream.
  	 * @since 1.0
 	 */
-	public SoundClip(File filePath, String soundName)
+	public SoundClip(final File filePath, final String soundName)
 		throws UnsupportedAudioFileException, IOException, LineUnavailableException
 	{
 		assert filePath != null : "filePath is null";
@@ -34,8 +35,8 @@ public class SoundClip {
 
 		this.audioInputStream = AudioSystem.getAudioInputStream(filePath.getAbsoluteFile());
 
-		this.soundClip = AudioSystem.getClip();
-		this.soundClip.open(audioInputStream);
+		this.clip = AudioSystem.getClip();
+		this.clip.open(audioInputStream);
 
 		this.soundName = soundName;
 	}
@@ -49,11 +50,13 @@ public class SoundClip {
 	 * @throws LineUnavailableException Thrown when unable to create an InputLineStream.
  	 * @since 1.0
 	 */
-	public SoundClip(String filePath, String soundName) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+	public SoundClip(final String filePath, final String soundName)
+		throws UnsupportedAudioFileException, IOException, LineUnavailableException
+	{
 		assert filePath != null : "filePath is null";
 		assert soundName != null : "soundName is null";
 
-		this(new File(filePath), soundName);
+		// this(new File(filePath), soundName);
 	}
 
 	// Getters
@@ -81,7 +84,7 @@ public class SoundClip {
  	 * @since 1.0
 	 */
 	public Clip getSoundClip() {
-		return this.soundClip;
+		return this.clip;
 	}
 
 	// Setters
@@ -90,7 +93,7 @@ public class SoundClip {
 	 * @param soundName A String object that contains the new name of the SoundClip.
  	 * @since 1.0
 	 */
-	public void setSoundClipName(String soundName) {
+	public void setSoundClipName(final String soundName) {
 		assert soundName != null : "soundName is null";
 
 		this.soundName = soundName;
@@ -102,15 +105,15 @@ public class SoundClip {
 	 * @param subscriberName A String object that contains the name of the sound to be played.
  	 * @since 1.0
 	 */
-	public void update(String subscriberName) {
+	public void update(final String subscriberName) {
 		assert subscriberName != null : "subscriberName is null";
 
 		if (!subscriberName.equals(this.soundName))
 			return;
 
-		this.soundClip.flush();
-		this.soundClip.setFramePosition(0);
-		this.soundClip.start();
+		this.clip.flush();
+		this.clip.setFramePosition(0);
+		this.clip.start();
 	}
 
 	/**
@@ -118,7 +121,7 @@ public class SoundClip {
  	 * @since 1.0
 	 */
 	public void stopSound() {
-		this.soundClip.stop();
+		this.clip.stop();
 	}
 
 	/**

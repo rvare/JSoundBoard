@@ -19,8 +19,7 @@ import org.simplesoundboard.exception.*;
  * @since 1.0
  */
 public final class Model {
-	private File presetFile;
-	private String filePresetPath;
+	private File presetFile; // If the user uses a preset file, store it here to easily save changes they make.
 	private HashMap<String, SoundClip> subscribers;
 
 	public static final short MAX_SOUNDS = 9;
@@ -50,10 +49,11 @@ public final class Model {
 	 * @throws NoSoundException When no sound corresponding to name is found, this exception is thrown.
  	 * @since 1.0
 	 */
-	public SoundClip getSelectedSoundClip(String soundName) throws NoSoundException {
-		assert name != null : "getSelectedSoundClip: name is null";
+	public SoundClip getSelectedSoundClip(final String soundName) throws NoSoundException {
+		assert soundName != null : "getSelectedSoundClip: name is null";
 
 		if (this.subscribers.size() == 0)
+			// TODO: Throw an error when there are no sounds.
 			return null;
 
 		SoundClip sc = this.subscribers.get(soundName);
@@ -70,7 +70,7 @@ public final class Model {
 	 * @throws SoundNameConflictException When there is a sound with the same name already in the model, this is thrown.
  	 * @since 1.0
 	 */
-	public void subscribe(SoundClip subscriber) throws SoundNameConflictException {
+	public void subscribe(final SoundClip subscriber) throws SoundNameConflictException {
 		assert subscriber != null : "New subscriber is null";
 
 		if (this.subscribers.size() == Model.MAX_SOUNDS)
@@ -89,7 +89,7 @@ public final class Model {
 	 * @throws NoSoundException When there is no sound in the Model, this is thrown.
  	 * @since 1.0
 	 */
-	public void unsubscribe(SoundClip subscriber) throws NoSoundException {
+	public void unsubscribe(final SoundClip subscriber) throws NoSoundException {
 		assert subscriber != null : "subscriber null";
 		assert this.subscribers.size() >= 0 : "Number of subscribers is negative";
 
@@ -107,7 +107,7 @@ public final class Model {
 	 * @param soundName A String object that has the name of the sound we want to play.
  	 * @since 1.0
 	 */
-	public void notifySubscribers(String soundName) {
+	public void notifySubscribers(final String soundName) {
 		assert soundName != null : "soundName is null";
 
 		if (this.subscribers.size() == 0)
@@ -122,7 +122,7 @@ public final class Model {
 	 * @param filePreset A String object that contains the path to the file that will be used to create a File object.
  	 * @since 1.0
 	 */
-	public void loadPreset(String filePreset) {
+	public void loadPreset(final String filePreset) {
 		assert filePreset != null : "filePreset is null";
 	}
 
@@ -131,7 +131,7 @@ public final class Model {
 	 * @param filePreset A String object that contains the path to the file that will be used to create a File object.
  	 * @since 1.0
 	 */
-	public void savePreset(String filePreset) {
+	public void savePreset(final String filePreset) {
 		assert filePreset != null : "filePreset is null";
 	}
 
@@ -145,7 +145,7 @@ public final class Model {
 	 * @throws SoundNameConflictException Thrown when the new name of the sound is already in use by another sound.
  	 * @since 1.0
 	 */
-	public void addSound(File soundFile, String soundName)
+	public void addSound(final File soundFile, final String soundName)
 		throws UnsupportedAudioFileException, IOException, LineUnavailableException, SoundNameConflictException
 	{
 		assert soundFile != null : "soundFile is null";

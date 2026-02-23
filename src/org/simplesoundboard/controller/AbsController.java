@@ -28,7 +28,7 @@ abstract public class AbsController {
 	public AbsController(final Model model, final IView iView) {
 		assert model != null : "Model is null.";
 		assert iView != null : "iView is null.";
-		System.out.println("AbsController");
+
 		this.model = model;
 		this.iView = iView;
 	}
@@ -71,7 +71,7 @@ abstract public class AbsController {
 	 * Calls the Model's load preset method when the user opens a preset file.
 	 * @param filePresetPath A String object that represents the path to the preset file.
 	 */
-	public void loadPresetToModel(String filePresetPath) {
+	public void loadPresetToModel(final String filePresetPath) {
 		assert !filePresetPath.equals("") && filePresetPath != null : "soundName is empty string or null.";
 		this.model.loadPreset(filePresetPath);
 	}
@@ -80,7 +80,7 @@ abstract public class AbsController {
 	 * Calls the Model's save preset method when the user opens a preset file.
 	 * @param filePresetPath A String object that represents the path that the preset file will be saved to.
 	 */
-	public void savePresetFromModel(String filePresetPath) {
+	public void savePresetFromModel(final String filePresetPath) {
 		assert !filePresetPath.equals("") && filePresetPath != null : "soundName is empty string or null.";
 		this.model.savePreset(filePresetPath);
 	}
@@ -90,7 +90,7 @@ abstract public class AbsController {
 	 * Calls the Model's subscribe method to add a new sound to the model.
 	 * @param soundFilePath A String object that represent the path to the audio to be used.
 	 */
-	public void addSoundToModel(String soundFilePath) {
+	public void addSoundToModel(final String soundFilePath) {
 		assert soundFilePath != null : "soundFilePath is null";
 		try {
 			this.model.subscribe(new SoundClip(soundFilePath, ""));
@@ -104,7 +104,7 @@ abstract public class AbsController {
 	 * Calls the Model's removeSoundFromModel method to remove a sound from the model.
 	 * @param soundClip A reference to the SoundClip object that is to be removed.
 	 */
-	public void removeSoundFromModel(SoundClip soundClip) throws NoSoundException {
+	public void removeSoundFromModel(final SoundClip soundClip) throws NoSoundException {
 		assert soundClip != null : "soundClip is null.";
 		this.model.unsubscribe(soundClip);
 	}
@@ -113,7 +113,7 @@ abstract public class AbsController {
 	 * Calls the Model's notifySubscribers to play the sound that corresponds to the button the user pressed.
 	 * @param soundName A String object that represents the name of the sound to be deleted.
 	 */
-	public void playSoundClip(String soundName) {
+	public void playSoundClip(final String soundName) {
 		assert !soundName.equals("") && soundName != null : "soundName is empty string or null.";
 		this.model.notifySubscribers(soundName);
 	}
