@@ -3,6 +3,7 @@ package org.simplesoundboard.exception;
 /**
  * Thrown when there is no sound.
  * @author Richard Varela
+ * @since 1.0
  */
 public class NoSoundException extends Exception {
 	/**

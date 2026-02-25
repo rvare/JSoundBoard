@@ -1,7 +1,7 @@
 package org.simplesoundboard.controller;
 
-import java.util.*;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.Toolkit;
@@ -21,12 +21,16 @@ import org.simplesoundboard.view.*;
 import org.simplesoundboard.controller.AbsController;
 import org.simplesoundboard.exception.*;
 
+/**
+ * Concrete class of the abstract cotroller.
+ */
 public final class Controller extends AbsController {
 	/**
 	 * Default constructor that also calls the AbsController constructor.
 	 * Preconditions: A valid Model and object that implements IView interface must be instantiated first.
 	 * @param model A reference to the Model object.
 	 * @param iView A reference to an object that implements the IView interface.
+	 * @since 1.0
 	 */
 	public Controller(final Model model, final IView iView) {
 		super(model, iView);

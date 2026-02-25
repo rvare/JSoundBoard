@@ -1,7 +1,8 @@
 package org.simplesoundboard.view;
 
-import java.util.*;
-import java.io.*;
+import java.util.HashMap;
+import java.io.File;
+import java.io.IOException;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -16,6 +17,7 @@ import org.simplesoundboard.exception.*;
 /**
  * Class that implements the IView interface and should extend from whatever graphics library is being used.
  * @author Richard Varela
+ * @since 1.0
  */
 public final class View extends JFrame implements IView {
 	private JMenuBar menuBar;

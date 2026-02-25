@@ -8,6 +8,7 @@ import javax.swing.event.*;
 /**
  * Displays brief documentation on how to use the application.
  * @author Richard Varela
+ * @since 1.0
  */
 public final class DocumentationDialog extends JDialog {
 	/**

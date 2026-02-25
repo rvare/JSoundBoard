@@ -8,6 +8,7 @@ import javax.swing.event.*;
 /**
  * Displays a dialog window with information about the application, author, and license information.
  * @author Richard Varela
+ * @since 1.0
  */
 public final class AboutDialog extends JDialog {
 	private static short DEAFULT_WIDTH = 250;
