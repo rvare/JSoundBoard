@@ -94,6 +94,7 @@ public final class Model {
 		assert this.subscribers.size() >= 0 : "Number of subscribers is negative";
 
 		if (this.subscribers.size() == 0)
+			// TODO: Throw and let user know there are no sounds loaded.
 			return;
 
 		if (this.subscribers.containsKey(subscriber.getSoundName()))
@@ -109,9 +110,6 @@ public final class Model {
 	 */
 	public void notifySubscribers(final String soundName) {
 		assert soundName != null : "soundName is null";
-
-		if (this.subscribers.size() == 0)
-			return;
 
 		this.subscribers.get(soundName).update(soundName);
 	}
@@ -152,6 +150,7 @@ public final class Model {
 		assert soundName != null : "soundName is null";
 
 		if (this.subscribers.size() == (int)Model.MAX_SOUNDS)
+			// TODO: Throw error that the user has hit the max number of sounds they can load.
 			return;
 
 		SoundClip newSoundClip = new SoundClip(soundFile, soundName);
