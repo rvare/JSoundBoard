@@ -1,8 +1,10 @@
 package org.simplesoundboard.model;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.io.File;
 import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import javax.sound.sampled.AudioInputStream;
@@ -130,8 +132,16 @@ public final class Model {
 	 * @param filePreset A String object that contains the path to the file that will be used to create a File object.
  	 * @since 1.0
 	 */
-	public void savePreset(final String filePreset) {
+	public void savePreset(final File filePreset) throws IOException {
 		assert filePreset != null : "filePreset is null";
+		System.out.println("Model.savePreset()");
+		BufferedWriter writer = new BufferedWriter(new FileWriter(filePreset));
+
+		for (Map.Entry<String, SoundClip> sc : this.subscribers.entrySet()) {
+			writer.write(String.format("%s\t%s\n", sc.getValue().getSoundName(), sc.getValue().getSoundFile().getAbsolutePath()));
+		}
+
+		writer.close();
 	}
 
 	/**

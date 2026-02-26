@@ -1,5 +1,7 @@
 package org.simplesoundboard.controller;
 
+import java.io.File;
+import java.io.IOException;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -85,8 +87,8 @@ abstract public class AbsController {
 	 * @param filePresetPath A String object that represents the path that the preset file will be saved to.
 	 * @since 1.0
 	 */
-	public void savePresetFromModel(final String filePresetPath) {
-		assert !filePresetPath.equals("") && filePresetPath != null : "soundName is empty string or null.";
+	public void savePresetFromModel(final File filePresetPath) throws IOException {
+		assert filePreset != null : "filePreset is null.";
 		this.model.savePreset(filePresetPath);
 	}
 

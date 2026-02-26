@@ -46,7 +46,19 @@ public final class Controller extends AbsController {
 
 	// Operations
 	public void saveSoundPresetFile() {
+		System.out.println("Save preset file in controller");
+		File saveFile = this.iView.savePresetFile();
+		System.out.println(saveFile.getAbsolutePath());
 
+		try {
+			this.model.savePreset(saveFile);
+		}
+		catch(IOException ioEx) {
+			System.out.println(ioEx.getMessage());
+		}
+		catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
 	}
 
 	public void loadSoundPresetFile() {
@@ -76,11 +88,13 @@ public final class Controller extends AbsController {
 	/**
 	 * Private internal class that implements the ActionListener interface that listens for when the user saves a preset file.
 	 * @author Richard Varela
+	 * @since 1.0
 	 */
 	private class SaveOptionListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			System.out.println("Save preset");
+			saveSoundPresetFile();
 		}
 	}
 

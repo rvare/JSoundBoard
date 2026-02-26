@@ -17,6 +17,7 @@ public class SoundClip {
 	private String soundName;
 	private AudioInputStream audioInputStream;
 	private Clip clip;
+	private File soundFile;
 
 	/**
 	 * Default constructor to use.
@@ -27,13 +28,15 @@ public class SoundClip {
 	 * @throws LineUnavailableException Thrown when unable to create an InputLineStream.
  	 * @since 1.0
 	 */
-	public SoundClip(final File filePath, final String soundName)
+	public SoundClip(final File soundFile, final String soundName)
 		throws UnsupportedAudioFileException, IOException, LineUnavailableException
 	{
-		assert filePath != null : "filePath is null";
+		assert soundFile != null : "filePath is null";
 		assert soundName != null : "soundName is null";
 
-		this.audioInputStream = AudioSystem.getAudioInputStream(filePath.getAbsoluteFile());
+		this.soundFile = soundFile;
+
+		this.audioInputStream = AudioSystem.getAudioInputStream(soundFile.getAbsoluteFile());
 
 		this.clip = AudioSystem.getClip();
 		this.clip.open(audioInputStream);
@@ -85,6 +88,15 @@ public class SoundClip {
 	 */
 	public Clip getSoundClip() {
 		return this.clip;
+	}
+
+	/**
+	 * Returns the File object that represents the sound file being used.
+	 * @return File object associated with the sound file.
+	 * @since 1.0
+	 */
+	public File getSoundFile() {
+		return this.soundFile;
 	}
 
 	// Setters

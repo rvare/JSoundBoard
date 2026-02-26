@@ -61,6 +61,20 @@ public interface IView {
 	public String nameSoundButtonDialog();
 
 	/**
+	 * Creates dialog and gets file path to load the preset file.
+	 * @return A File object where the preset file will be used to load the sounds.
+	 * @since 1.0
+	 */
+	public File loadPresetFile();
+
+	/**
+	 * Creates dialog and gets file path to save preset file.
+	 * @return A File object where the preset file will be saved.
+	 * @since 1.0
+	 */
+	public File savePresetFile();
+
+	/**
 	 * Used to get the directory path a sound file that will be added to the application.
 	 * @return A File object that represents the sound file.
 	 * @since 1.0
