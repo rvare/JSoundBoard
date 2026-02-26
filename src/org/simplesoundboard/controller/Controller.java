@@ -62,7 +62,19 @@ public final class Controller extends AbsController {
 	}
 
 	public void loadSoundPresetFile() {
+		System.out.println("Load preset file in controller");
+		File loadFile = this.iView.loadPresetFile();
+		System.out.println(loadFile.getAbsolutePath());
 
+		try {
+			this.model.loadPreset(loadFile);
+		}
+		catch(IOException ioEx) {
+			System.out.println(ioEx.getMessage());
+		}
+		catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
 	}
 
 	public void showAboutDialog() {
@@ -82,6 +94,7 @@ public final class Controller extends AbsController {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			System.out.println("Open preset");
+			loadSoundPresetFile();
 		}
 	}
 

@@ -151,7 +151,10 @@ public final class View extends JFrame implements IView {
 	@Override
 	public File loadPresetFile() {
 		System.out.println("Load file");
-		return null;
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.showOpenDialog(this);
+
+		return fileChooser.getSelectedFile();
 	}
 
 	@Override

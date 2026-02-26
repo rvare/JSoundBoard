@@ -77,7 +77,7 @@ abstract public class AbsController {
 	 * @param filePresetPath A String object that represents the path to the preset file.
 	 * @since 1.0
 	 */
-	public void loadPresetToModel(final String filePresetPath) {
+	public void loadPresetToModel(final File filePresetPath) throws IOException {
 		assert !filePresetPath.equals("") && filePresetPath != null : "soundName is empty string or null.";
 		this.model.loadPreset(filePresetPath);
 	}
@@ -88,7 +88,7 @@ abstract public class AbsController {
 	 * @since 1.0
 	 */
 	public void savePresetFromModel(final File filePresetPath) throws IOException {
-		assert filePreset != null : "filePreset is null.";
+		assert filePresetPath != null : "filePreset is null.";
 		this.model.savePreset(filePresetPath);
 	}
 

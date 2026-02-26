@@ -123,7 +123,7 @@ public final class Model {
 	 * @param filePreset A String object that contains the path to the file that will be used to create a File object.
  	 * @since 1.0
 	 */
-	public void loadPreset(final String filePreset) {
+	public void loadPreset(final File filePreset) throws IOException {
 		assert filePreset != null : "filePreset is null";
 	}
 
