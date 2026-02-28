@@ -94,10 +94,7 @@ public final class Controller extends AbsController {
 
 	}
 
-	/**
-	 * Calls the Controller which will tell the View class to create a new button for the sound when the user uses a preset file.
-	 * @since 1.0
-	 */
+	@Override
 	public void createSoundButton(String soundName) {
 		SoundButtonListener sbListener = new SoundButtonListener(soundName);
 		try {

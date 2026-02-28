@@ -70,6 +70,12 @@ abstract public class AbsController {
 	 */
 	abstract public void showDocumentationDialog();
 
+	/**
+	 * Used to call the View class to create a new button for the sound when the user uses a preset file.
+	 * @since 1.0
+	 */
+	abstract public void createSoundButton(String soundName);
+
 	// Concrete methods
 	// File operations
 	/**
