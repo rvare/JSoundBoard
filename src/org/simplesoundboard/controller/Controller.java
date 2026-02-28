@@ -69,6 +69,15 @@ public final class Controller extends AbsController {
 		try {
 			this.model.loadPreset(loadFile);
 		}
+		catch(UnsupportedAudioFileException ex) {
+			System.out.println(ex.getMessage());
+		}
+		catch(LineUnavailableException ex) {
+			System.out.println(ex.getMessage());
+		}
+		catch(SoundNameConflictException ex) {
+			System.out.println(ex.getMessage());
+		}
 		catch(IOException ioEx) {
 			System.out.println(ioEx.getMessage());
 		}

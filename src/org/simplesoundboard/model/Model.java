@@ -123,8 +123,23 @@ public final class Model {
 	 * @param filePreset A String object that contains the path to the file that will be used to create a File object.
  	 * @since 1.0
 	 */
-	public void loadPreset(final File filePreset) throws IOException {
+	public void loadPreset(final File filePreset) 
+		throws UnsupportedAudioFileException, IOException, LineUnavailableException, SoundNameConflictException
+	{
 		assert filePreset != null : "filePreset is null";
+		System.out.println("Model.savePreset()");
+		BufferedReader reader = new BufferedReader(new FileReader(filePreset));
+		String line;
+
+		while ((line = reader.readLine()) != null) {
+			System.out.println(line);
+			String[] split_line = line.split("\t");
+			System.out.println(split_line[0]);
+			System.out.println(split_line[1]);
+			File soundClipFile = new File(split_line[1]);
+			this.addSound(soundClipFile, split_line[0]);
+			// Use split_line[0] to create a JButton
+		}
 	}
 
 	/**
