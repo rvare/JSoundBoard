@@ -35,6 +35,8 @@ public final class Controller extends AbsController {
 	public Controller(final Model model, final IView iView) {
 		super(model, iView);
 
+		this.model.setController(this);
+
 		// Create menu bar listeners
 		this.iView.addNewSoundListener(new AddSoundListener());
 		this.iView.addDeleteSoundListener(new DeleteSoundListener());
@@ -46,43 +48,41 @@ public final class Controller extends AbsController {
 
 	// Operations
 	public void saveSoundPresetFile() {
-		System.out.println("Save preset file in controller");
 		File saveFile = this.iView.savePresetFile();
-		System.out.println(saveFile.getAbsolutePath());
 
 		try {
 			this.model.savePreset(saveFile);
 		}
 		catch(IOException ioEx) {
-			System.out.println(ioEx.getMessage());
+			// System.out.println(ioEx.getMessage());
+			this.iView.showErrorDialog(ioEx.getMessage());
 		}
 		catch(Exception ex) {
-			System.out.println(ex.getMessage());
+			// System.out.println(ex.getMessage());
+			this.iView.showErrorDialog(ex.getMessage());
 		}
 	}
 
 	public void loadSoundPresetFile() {
-		System.out.println("Load preset file in controller");
 		File loadFile = this.iView.loadPresetFile();
-		System.out.println(loadFile.getAbsolutePath());
 
 		try {
 			this.model.loadPreset(loadFile);
 		}
 		catch(UnsupportedAudioFileException ex) {
-			System.out.println(ex.getMessage());
+			// System.out.println(ex.getMessage());
 		}
 		catch(LineUnavailableException ex) {
-			System.out.println(ex.getMessage());
+			// System.out.println(ex.getMessage());
 		}
 		catch(SoundNameConflictException ex) {
-			System.out.println(ex.getMessage());
+			// System.out.println(ex.getMessage());
 		}
 		catch(IOException ioEx) {
-			System.out.println(ioEx.getMessage());
+			// System.out.println(ioEx.getMessage());
 		}
 		catch(Exception ex) {
-			System.out.println(ex.getMessage());
+			// System.out.println(ex.getMessage());
 		}
 	}
 
@@ -94,6 +94,23 @@ public final class Controller extends AbsController {
 
 	}
 
+	/**
+	 * Calls the Controller which will tell the View class to create a new button for the sound when the user uses a preset file.
+	 * @since 1.0
+	 */
+	public void createSoundButton(String soundName) {
+		SoundButtonListener sbListener = new SoundButtonListener(soundName);
+		try {
+			this.iView.addSoundButton(sbListener, soundName);
+		}
+		catch(SoundNameConflictException ex) {
+			this.iView.showErrorDialog(ex.getMessage());
+		}
+		catch(Exception ex) {
+			this.iView.showErrorDialog(ex.getMessage());
+		}
+	}
+
 	// Menu bar listeners
 	/**
 	 * Private internal class that implements the ActionListener interface that listens for when the user loads a preset file.
@@ -102,7 +119,6 @@ public final class Controller extends AbsController {
 	private class LoadOptionListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			System.out.println("Open preset");
 			loadSoundPresetFile();
 		}
 	}
@@ -115,7 +131,6 @@ public final class Controller extends AbsController {
 	private class SaveOptionListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			System.out.println("Save preset");
 			saveSoundPresetFile();
 		}
 	}

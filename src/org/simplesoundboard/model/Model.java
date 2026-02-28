@@ -15,6 +15,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.simplesoundboard.model.SoundClip;
 import org.simplesoundboard.exception.*;
+import org.simplesoundboard.controller.Controller;
 
 /**
  * The Model of the MVC architecture.
@@ -22,6 +23,7 @@ import org.simplesoundboard.exception.*;
  * @since 1.0
  */
 public final class Model {
+	private Controller controller;
 	private File presetFile; // If the user uses a preset file, store it here to easily save changes they make.
 	private HashMap<String, SoundClip> subscribers;
 
@@ -64,6 +66,11 @@ public final class Model {
 			throw new NoSoundException("Sound does not exist.");
 
 		return sc;
+	}
+
+	// Setters
+	public void setController(Controller controller) {
+		this.controller = controller;
 	}
 
 	// Observer operations
@@ -127,18 +134,14 @@ public final class Model {
 		throws UnsupportedAudioFileException, IOException, LineUnavailableException, SoundNameConflictException
 	{
 		assert filePreset != null : "filePreset is null";
-		System.out.println("Model.savePreset()");
 		BufferedReader reader = new BufferedReader(new FileReader(filePreset));
 		String line;
 
 		while ((line = reader.readLine()) != null) {
-			System.out.println(line);
 			String[] split_line = line.split("\t");
-			System.out.println(split_line[0]);
-			System.out.println(split_line[1]);
 			File soundClipFile = new File(split_line[1]);
 			this.addSound(soundClipFile, split_line[0]);
-			// Use split_line[0] to create a JButton
+			this.controller.createSoundButton(split_line[0]); // Throws SoundNameConflictException
 		}
 	}
 
@@ -149,7 +152,6 @@ public final class Model {
 	 */
 	public void savePreset(final File filePreset) throws IOException {
 		assert filePreset != null : "filePreset is null";
-		System.out.println("Model.savePreset()");
 		BufferedWriter writer = new BufferedWriter(new FileWriter(filePreset));
 
 		for (Map.Entry<String, SoundClip> sc : this.subscribers.entrySet()) {

@@ -150,7 +150,6 @@ public final class View extends JFrame implements IView {
 
 	@Override
 	public File loadPresetFile() {
-		System.out.println("Load file");
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.showOpenDialog(this);
 
@@ -159,7 +158,6 @@ public final class View extends JFrame implements IView {
 
 	@Override
 	public File savePresetFile() {
-		System.out.println("Save file");
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.showSaveDialog(this);
 
@@ -168,7 +166,6 @@ public final class View extends JFrame implements IView {
 
 	@Override
 	public File newSoundFilePath() {
-		System.out.println("newSoundFilePath");
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setAcceptAllFileFilterUsed(false);
 
