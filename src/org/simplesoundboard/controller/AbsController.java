@@ -33,6 +33,8 @@ abstract public class AbsController {
 
 		this.model = model;
 		this.iView = iView;
+
+		this.model.setController(this);
 	}
 
 	// Getters
@@ -67,6 +69,7 @@ abstract public class AbsController {
 
 	/**
 	 * Used to call the showDocumentationDialog method of the IView interface.
+	 * @since 1.0
 	 */
 	abstract public void showDocumentationDialog();
 
@@ -100,7 +103,7 @@ abstract public class AbsController {
 		this.model.savePreset(filePresetPath);
 	}
 
-			// Sound operations
+	// Sound operations
 	/**
 	 * Calls the Model's subscribe method to add a new sound to the model.
 	 * @param soundFilePath A String object that represent the path to the audio to be used.

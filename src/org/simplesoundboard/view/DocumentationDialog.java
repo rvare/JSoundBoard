@@ -19,8 +19,23 @@ public final class DocumentationDialog extends JDialog {
 
 		String docContent = """
 							<html>
-							<body>
-							<p>Here is some doc content.</p>
+							<body style='width: 300px'>
+							<p>
+								To add a sound, go to Edit and click Add Sound.
+								There a file explorer will open allowing to find the sound file you want.
+								Once you've picked a sound file, give it a unique name and it will be ready to use.
+							</p>
+							<br>
+							<p>
+								To delete a sound, go to Edit and click Delete Sound.
+								Enter the name of the sound in the dialog and it should be deleted.
+							</p>
+							<br>
+							<p>
+								To save your loaded sounds, you can create a preset file by going to File and clicking Save.
+								You can use this file to load all your sounds without doing it manually.
+								To load a preset, go to File and click Open.
+							</p>
 							</body>
 							</html>
 							""";
@@ -30,7 +45,7 @@ public final class DocumentationDialog extends JDialog {
 		this.getContentPane().add(BorderLayout.CENTER, panel);
 
 		this.pack();
-		this.setSize(500, 400);
+		this.setSize(500, 300);
 		this.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 	}
 }

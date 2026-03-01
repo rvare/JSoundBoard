@@ -14,7 +14,7 @@ public final class AboutDialog extends JDialog {
 	private static short DEAFULT_WIDTH = 250;
 	private static short DEAFULT_HEIGHT = 150;
 	private static String applicationTitle = "Simple Sound Board";
-	private static String authorAndCopyright = "Copyright 2026 REV";
+	private static String authorAndCopyright = "Copyright 2026 Richard Varela (rvare)";
 	private static String versionNumber = "v1.0";
 
 	/**

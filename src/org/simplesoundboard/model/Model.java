@@ -15,7 +15,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.simplesoundboard.model.SoundClip;
 import org.simplesoundboard.exception.*;
-import org.simplesoundboard.controller.Controller;
+import org.simplesoundboard.controller.AbsController;
 
 /**
  * The Model of the MVC architecture.
@@ -23,11 +23,11 @@ import org.simplesoundboard.controller.Controller;
  * @since 1.0
  */
 public final class Model {
-	private Controller controller;
+	private AbsController absController;
 	private File presetFile; // If the user uses a preset file, store it here to easily save changes they make.
 	private HashMap<String, SoundClip> subscribers;
 
-	public static final short MAX_SOUNDS = 9;
+	public static final short MAX_SOUNDS = 9; // Sets the limit for the number of sounds loaded when running.
 
 	/**
 	 * Main contructor of the Model class.
@@ -49,7 +49,7 @@ public final class Model {
 
 	/**
 	 * Gets a specific sound clip by using a string.
-	 * @param name String that represents the name of the sound.
+	 * @param soundName String that represents the name of the sound.
 	 * @return Returns a SoundClip object that corresponds to the String in name.
 	 * @throws NoSoundException When no sound corresponding to name is found, this exception is thrown.
  	 * @since 1.0
@@ -69,8 +69,8 @@ public final class Model {
 	}
 
 	// Setters
-	public void setController(Controller controller) {
-		this.controller = controller;
+	public void setController(AbsController absController) {
+		this.absController = absController;
 	}
 
 	// Observer operations
@@ -128,9 +128,13 @@ public final class Model {
 	/**
 	 * Opens a text file that contains several directory paths to several audio files and loads them in for the user.
 	 * @param filePreset A String object that contains the path to the file that will be used to create a File object.
+	 * @throws UnsupportedAudioFileException
+	 * @throws IOException
+	 * @throws LineUnavailableException
+	 * @throws SoundNameConflictException
  	 * @since 1.0
 	 */
-	public void loadPreset(final File filePreset) 
+	public void loadPreset(final File filePreset)
 		throws UnsupportedAudioFileException, IOException, LineUnavailableException, SoundNameConflictException
 	{
 		assert filePreset != null : "filePreset is null";
@@ -141,13 +145,14 @@ public final class Model {
 			String[] split_line = line.split("\t");
 			File soundClipFile = new File(split_line[1]);
 			this.addSound(soundClipFile, split_line[0]);
-			this.controller.createSoundButton(split_line[0]); // Throws SoundNameConflictException
+			this.absController.createSoundButton(split_line[0]); // Throws SoundNameConflictException
 		}
 	}
 
 	/**
 	 * Saves the directory path of the currently loaded sounds, allowing the user to easily load all audio files without doing it manually.
 	 * @param filePreset A String object that contains the path to the file that will be used to create a File object.
+	 * @throws IOException
  	 * @since 1.0
 	 */
 	public void savePreset(final File filePreset) throws IOException {

@@ -35,8 +35,6 @@ public final class Controller extends AbsController {
 	public Controller(final Model model, final IView iView) {
 		super(model, iView);
 
-		this.model.setController(this);
-
 		// Create menu bar listeners
 		this.iView.addNewSoundListener(new AddSoundListener());
 		this.iView.addDeleteSoundListener(new DeleteSoundListener());
