@@ -85,11 +85,11 @@ public final class Controller extends AbsController {
 	}
 
 	public void showAboutDialog() {
-
+		this.iView.showAboutDialog();
 	}
 
 	public void showDocumentationDialog() {
-
+		this.iView.showDocumentationDialog();
 	}
 
 	@Override
@@ -207,7 +207,7 @@ public final class Controller extends AbsController {
 	private class AboutListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			iView.showAboutDialog();
+			showAboutDialog();
 		}
 	}
 
@@ -218,7 +218,7 @@ public final class Controller extends AbsController {
 	private class DocumentationListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			iView.showDocumentationDialog();
+			showDocumentationDialog();
 		}
 	}
 
