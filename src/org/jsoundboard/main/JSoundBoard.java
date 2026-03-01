@@ -29,7 +29,7 @@ import org.simplesoundboard.controller.Controller;
  * The View, Model, and Controller are instantiated for use, and ends with the main frame being shown.
  * @author Richard Varela
  */
-public final class SimpleSoundBoard {
+public final class JSoundBoard {
 	/**
 	 * The main entry point of the application. No arguements are passed in for args.
 	 */
