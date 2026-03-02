@@ -14,15 +14,15 @@ You should have received a copy of the GNU General Public License along with Sim
 If not, see <https://www.gnu.org/licenses/>.
 */
 
-package org.simplesoundboard.main;
+package org.jsoundboard.main;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-import org.simplesoundboard.view.View;
-import org.simplesoundboard.model.Model;
-import org.simplesoundboard.controller.Controller;
+import org.jsoundboard.view.View;
+import org.jsoundboard.model.Model;
+import org.jsoundboard.controller.Controller;
 
 /**
  * The Main entry point of the application.

@@ -14,7 +14,7 @@ You should have received a copy of the GNU General Public License along with Sim
 If not, see <https://www.gnu.org/licenses/>.
 */
 
-package org.simplesoundboard.model;
+package org.jsoundboard.model;
 
 import java.io.File;
 import java.io.IOException;

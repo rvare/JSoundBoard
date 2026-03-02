@@ -14,7 +14,7 @@ You should have received a copy of the GNU General Public License along with Sim
 If not, see <https://www.gnu.org/licenses/>.
 */
 
-package org.simplesoundboard.controller;
+package org.jsoundboard.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,10 +32,10 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import org.simplesoundboard.model.*;
-import org.simplesoundboard.view.*;
-import org.simplesoundboard.controller.AbsController;
-import org.simplesoundboard.exception.*;
+import org.jsoundboard.model.*;
+import org.jsoundboard.view.*;
+import org.jsoundboard.controller.AbsController;
+import org.jsoundboard.exception.*;
 
 /**
  * Concrete class of the abstract cotroller.

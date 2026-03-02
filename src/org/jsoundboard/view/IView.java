@@ -14,12 +14,12 @@ You should have received a copy of the GNU General Public License along with Sim
 If not, see <https://www.gnu.org/licenses/>.
 */
 
-package org.simplesoundboard.view;
+package org.jsoundboard.view;
 
 import java.io.File;
 import java.io.IOException;
 
-import org.simplesoundboard.exception.*;
+import org.jsoundboard.exception.*;
 
 /**
  * Interface that makes it easy for any user to alter View but forces to commit the "contract" that the Controller needs to function.

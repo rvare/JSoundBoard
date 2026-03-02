@@ -14,7 +14,7 @@ You should have received a copy of the GNU General Public License along with Sim
 If not, see <https://www.gnu.org/licenses/>.
 */
 
-package org.simplesoundboard.model;
+package org.jsoundboard.model;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,9 +29,9 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import org.simplesoundboard.model.SoundClip;
-import org.simplesoundboard.exception.*;
-import org.simplesoundboard.controller.AbsController;
+import org.jsoundboard.model.SoundClip;
+import org.jsoundboard.exception.*;
+import org.jsoundboard.controller.AbsController;
 
 /**
  * The Model of the MVC architecture.

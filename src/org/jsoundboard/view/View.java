@@ -14,7 +14,7 @@ You should have received a copy of the GNU General Public License along with Sim
 If not, see <https://www.gnu.org/licenses/>.
 */
 
-package org.simplesoundboard.view;
+package org.jsoundboard.view;
 
 import java.util.HashMap;
 import java.io.File;
@@ -27,8 +27,8 @@ import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import org.simplesoundboard.view.*;
-import org.simplesoundboard.exception.*;
+import org.jsoundboard.view.*;
+import org.jsoundboard.exception.*;
 
 /**
  * Class that implements the IView interface and should extend from whatever graphics library is being used.

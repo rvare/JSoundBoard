@@ -14,7 +14,7 @@ You should have received a copy of the GNU General Public License along with Sim
 If not, see <https://www.gnu.org/licenses/>.
 */
 
-package org.simplesoundboard.exception;
+package org.jsoundboard.exception;
 
 /**
  * Thrown when there is no sound.
