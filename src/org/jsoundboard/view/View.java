@@ -106,21 +106,33 @@ public final class View extends JFrame implements IView {
 	}
 
 	// Operations
+	/**
+	 * @see IView.
+	 */
 	@Override
 	public void showMainFrame() {
 		this.setVisible(true);
 	}
 
+	/**
+	 * @see IView.
+	 */
 	@Override
 	public void showAboutDialog() {
 		new AboutDialog().setVisible(true);
 	}
 
+	/**
+	 * @see IView.
+	 */
 	@Override
 	public void showDocumentationDialog() {
 		new DocumentationDialog().setVisible(true);
 	}
 
+	/**
+	 * @see IView.
+	 */
 	@Override
 	public void addSoundButton(Object buttonListener, String soundName) throws SoundNameConflictException {
 		assert buttonListener != null : "buttonListener is null";
@@ -140,6 +152,9 @@ public final class View extends JFrame implements IView {
 		repaint();
 	}
 
+	/**
+	 * @see IView.
+	 */
 	@Override
 	public void deleteSoundButton(String soundButtonName) throws NoSoundException {
 		assert soundButtonName != null && !soundButtonName.equals("") : "soundButtonName is null or empty";
@@ -155,6 +170,9 @@ public final class View extends JFrame implements IView {
 		repaint();
 	}
 
+	/**
+	 * @see IView.
+	 */
 	@Override
 	public String nameSoundButtonDialog() {
 		NameSoundDialog nameSoundDialog = new NameSoundDialog(this);
@@ -164,6 +182,9 @@ public final class View extends JFrame implements IView {
 			return "";
 	}
 
+	/**
+	 * @see IView.
+	 */
 	@Override
 	public File loadPresetFile() {
 		JFileChooser fileChooser = new JFileChooser();
@@ -172,6 +193,9 @@ public final class View extends JFrame implements IView {
 		return fileChooser.getSelectedFile();
 	}
 
+	/**
+	 * @see IView.
+	 */
 	@Override
 	public File savePresetFile() {
 		JFileChooser fileChooser = new JFileChooser();
@@ -180,6 +204,9 @@ public final class View extends JFrame implements IView {
 		return fileChooser.getSelectedFile();
 	}
 
+	/**
+	 * @see IView.
+	 */
 	@Override
 	public File newSoundFilePath() {
 		JFileChooser fileChooser = new JFileChooser();
@@ -198,37 +225,58 @@ public final class View extends JFrame implements IView {
 		return fileChooser.getSelectedFile();
 	}
 
+	/**
+	 * @see IView.
+	 */
 	@Override
 	public void showErrorDialog(String errorMessage) {
 		JOptionPane.showMessageDialog(this, errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	// Add listeners
+	/**
+	 * @see IView.
+	 */
 	@Override
 	public void addNewSoundListener(Object newSoundListener) {
 		this.addSoundOption.addActionListener((ActionListener)(newSoundListener));
 	}
 
+	/**
+	 * @see IView.
+	 */
 	@Override
 	public void addDeleteSoundListener(Object deleteSoundListener) {
 		this.deleteSoundOption.addActionListener((ActionListener)(deleteSoundListener));
 	}
 
+	/**
+	 * @see IView.
+	 */
 	@Override
 	public void addAboutDialogListener(Object aboutOptionListener) {
 		this.aboutOption.addActionListener((ActionListener)(aboutOptionListener));
 	}
 
+	/**
+	 * @see IView.
+	 */
 	@Override
 	public void addDocumentationListener(Object docOptionListener) {
 		this.docOption.addActionListener((ActionListener)(docOptionListener));
 	}
 
+	/**
+	 * @see IView.
+	 */
 	@Override
 	public void addSavePresetListener(Object saveOptionListener) {
 		this.savePresetOption.addActionListener((ActionListener)(saveOptionListener));
 	}
 
+	/**
+	 * @see IView.
+	 */
 	@Override
 	public void addLoadPresetListener(Object loadOptionListener) {
 		this.openPresetOption.addActionListener((ActionListener)(loadOptionListener));
