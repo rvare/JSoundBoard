@@ -61,6 +61,11 @@ public final class Controller extends AbsController {
 	}
 
 	// Operations
+	/**
+	 * Used to tell the View class to show a JFileChooser to the user to elect where their present file (which is a plain text file) to be saved, and tells the Model to the paths of all currently loaded sounds to the file.
+	 * @since 1.0
+	 */
+	@Override
 	public void saveSoundPresetFile() {
 		File saveFile = this.iView.savePresetFile();
 
@@ -77,6 +82,12 @@ public final class Controller extends AbsController {
 		}
 	}
 
+
+	/**
+	 * Used to tell the View class to display a JFileChooser that allows the user to pick a preset file (which is a plain text file) and pass that file to the Model to load in all sounds from that file.
+	 * @since 1.0
+	 */
+	@Override
 	public void loadSoundPresetFile() {
 		File loadFile = this.iView.loadPresetFile();
 
@@ -100,14 +111,24 @@ public final class Controller extends AbsController {
 		}
 	}
 
+	/**
+	 * @see AbsController
+	 */
 	public void showAboutDialog() {
 		this.iView.showAboutDialog();
 	}
 
+	/**
+	 * @see AbsController
+	 */
 	public void showDocumentationDialog() {
 		this.iView.showDocumentationDialog();
 	}
 
+	/**
+	 * Used to call the View class to create a new button for the sound when the user uses a preset file. The implementation of this method is based on what you can call from the IView class.
+	 * @since 1.0
+	 */
 	@Override
 	public void createSoundButton(String soundName) {
 		SoundButtonListener sbListener = new SoundButtonListener(soundName);
@@ -151,6 +172,11 @@ public final class Controller extends AbsController {
 	 * @author Richard Varela
 	 */
 	private class AddSoundListener implements ActionListener {
+		/**
+		 * Overridden method from the ActionListener.
+		 * Calls View to display a JFileChooser and get a File object, then displays a dialog to name the button and sound.
+		 * The File object is passed to the Model to load the sound, along with the sound name.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			File newSound = iView.newSoundFilePath();

@@ -74,7 +74,16 @@ abstract public class AbsController {
 
 	// Operations
 	// Abstract methods
+	/**
+	 * saveSoundPresentFile is an abstract method that must be implemented by the concrete class Controller. See Controller for implementation details.
+	 * @see Controller
+	 */
 	abstract public void saveSoundPresetFile();
+
+	/**
+	 * loadSoundPresentFile is an abstract method that must be implemented by the concrete class Controller. See Controller for implementation details.
+	 * @see Controller
+	 */
 	abstract public void loadSoundPresetFile();
 
 	/**

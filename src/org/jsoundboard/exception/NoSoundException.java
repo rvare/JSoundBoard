@@ -17,7 +17,7 @@ If not, see <https://www.gnu.org/licenses/>.
 package org.jsoundboard.exception;
 
 /**
- * Thrown when there is no sound.
+ * Thrown when there is no sound with a given name.
  * @author Richard Varela
  * @since 1.0
  */
