@@ -6,7 +6,10 @@
 	- [MVC Architecture ](#mvc-architecture )
 		- [Model](#model)
 		- [View](#view)
+		- [Controller](#controller)
 - [Contributing Guidelines](#contributing-guidelines)
+
+- - -
 
 # Introduction
 
@@ -33,6 +36,14 @@ To run the application, go to where the jar file is and run:
 ```bash
 java -jar jsoundboard.jar
 ```
+
+You can also skip putting the application in a `.jar` file by just compiling it and running it in the `/classes` directory by doing the following
+
+```bash
+java org/jsoundboard/main/JSoundBoard
+```
+
+This is good for when you want to constantly check on your work.
 
 # Design
 
@@ -182,6 +193,72 @@ ActionListener <| -- cancelButtonListener
 	- Look at the Java API documentation for further details on those classes.
 
 *Note:* The UML class diagram is made using Mermaid, but it does not let the user decide where each part of the diagram goes. So, if it looks bad, that's why.
+
+### Controller
+
+```mermaid
+classDiagram
+class AbsController {
+	# Model model
+	# IView iView
+	+ AbsController(Model model, IView view)
+	+ getModel() Model
+	+ getIView() IView
+	+ saveSoundPresetFile() void*
+	+ loadSoundPresetFile() void*
+	+ showAboutDialog() void*
+	+ showDocumentationDialog() void*
+	+ createSoundButton(String soundName) void*
+	+ loadPresetToModel(File filePresetPath) void
+	+ savePresetFromModel(File filePresetPath) void
+	+ addSoundToModel(String soundFilePath) void
+	+ removeSoundFromModel(SoundClip soundClip) void
+	+ playSoundClip(String soundName) void
+}
+class Controller {
+	+ Controller(Model model, IView iView)
+}
+class LoadOptionListener
+class SaveOptionListener
+class AddSoundListener
+class AddSoundListener
+class DeleteSoundListener
+class AboutListener
+class DocumentationListener
+class SoundButtonListene {
+	- String name
+	+ SoundbuttonListener()
+	+ SoundbuttonListener(String name)
+	+ getName() String
+	+ setName(String name) void
+}
+
+AbsController <|-- Controller
+
+Controller *-- LoadOptionListener
+Controller *-- SaveOptionListener
+Controller *-- AddSoundListener
+Controller *-- AddSoundListener
+Controller *-- DeleteSoundListener
+Controller *-- AboutListener
+Controller *-- DocumentationListener
+Controller *-- SoundButtonListene
+
+ActionLilstener <|-- LoadOptionListener
+ActionLilstener <|-- SaveOptionListener
+ActionLilstener <|-- AddSoundListener
+ActionLilstener <|-- AddSoundListener
+ActionLilstener <|-- DeleteSoundListener
+ActionLilstener <|-- AboutListener
+ActionLilstener <|-- DocumentationListener
+ActionLilstener <|-- SoundButtonListene
+```
+
+- the `Controller` class inherits from the and abstract `AbsController` class. The reason for this is when the user decides to use different libraries to customize the application, they have a contract they know they need to fulfill in order for the application to work.
+	- Another reason for using an abstract class and not an interface is because there are some methods that are already implemented that a user doesn't need to customize.
+	- The abstract methods are the only things the user has to fulfill.
+- The listeners don't really have much in them because `ActionListener` is an interface with one method they need to implement.
+	- the exception is `SoundButtonListener`, and that's because that object will last as long as that sound is used in the application.
 
 # Contributing Guidelines
 
