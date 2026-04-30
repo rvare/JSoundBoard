@@ -3,6 +3,10 @@
 - [Introduction](#introduction)
 - [Build Guide](#build-guide)
 - [Design](#design)
+	- [MVC Architecture ](#mvc-architecture )
+		- [Model](#model)
+		- [View](#view)
+- [Contributing Guidelines](#contributing-guidelines)
 
 # Introduction
 
@@ -86,6 +90,8 @@ SoundClip ..> File
 - The Model and SoundClip use the observer design pattern.
 	- The rationale for this pattern is to make it easy to play the correct sound when the user clicks the button corresponding to that sound.
 - The SoundClip class is responsible for actually loading the sound file and playing it.
+	- It is composed with the following classes that come from the Java standard library: `AudioInputStream`, `Clip`, and `File`.
+		- See the Java API documentation for further details about these classes.
 
 ### View
 
@@ -168,3 +174,25 @@ NameSoundDialog *-- cancelButtonListener
 ActionListener <| -- okButtonListener
 ActionListener <| -- cancelButtonListener
 ```
+
+- The View is split between two classes: `IView` and `View`.
+	- The reason for this is to allow someone to change the interface if they want to, or to use a completely different GUI library altogether.
+		- Hence, why `IView` class exists--it serves as a *contract* that must be fulfilled if someone decides to do that.
+- The `View`, `NameSoundDialog`, `DocumentationDialog`, and `AboutDialog` inherit from Java Swing classes, hence why there is some sparseness in the diagram.
+	- Look at the Java API documentation for further details on those classes.
+
+*Note:* The UML class diagram is made using Mermaid, but it does not let the user decide where each part of the diagram goes. So, if it looks bad, that's why.
+
+# Contributing Guidelines
+
+When you contribute code, be sure to describe what you did as clearly as you can. Also, you must follow this procedure:
+
+- If you are tackling an issue, generate a branch from that issue's page and assign yourself to the issue.
+	- Assigning yourself to the issue helps to keep track who is doing what.
+- When you feel you are finished, be sure to use the keywords `closes`, `resolves`, or `fixes` follow by a pound sign with the issue number (i.e. `#42`).
+	- This will automatically close the issue once a pull request has been completed.
+		- **Ex:** `This commit closes #42 <add more description to your commit>.`
+	- **DO NOT MERGE INTO MAIN.**
+	- Push your branch to the remote repo.
+- On GitHub, make a pull request to merge the branch that contains your work.
+	- This gives a chance for someone to check your work and test it before merging it to the main branch.
