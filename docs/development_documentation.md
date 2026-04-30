@@ -44,7 +44,7 @@ Each has the following responsibilities:
 - View is responsible for display the GUI and allowing the user to play the sounds.
 - Controller is responsible for communications between the Model and View, and handling errors when they happen in either the Model or View.
 
-## Model
+### Model
 
 ```mermaid
 classDiagram
@@ -52,41 +52,119 @@ classDiagram
 class Model {
 	- File presetFile
 	- String filePresetPath
-	- HashMap~String, SoundClip~ subscribers
-    + Mode()
-    + int getSoundCount()
-    + SoundClip getSelectedSoundClip(String soundName)
-    + void setController(AbsController absController)
-	+ void subscribe(SoundClip subscriber)
-	+ void unsubscribe(SoundClip subscriber)
-	+ void notifySubscribers(String soundName)
-	+ String loadPreset(File filePreset)
-	+ String savePreset(File filePreset)
-    + void addSound(File soundFile, String soundName)
+	- Subscriber[] subscribers
+	+ subscribe(Subscriber subscriber) void
+	+ unsubscribe(Subscriber subscriber) void
+	+ notifySubscribers() void
+	+ loadPreset(String filePreset) String
+	+ savePreset(String filePreset) String
 }
-
-class Clip
-
 class SoundClip {
-    - String soundName
-    - AudioInputStream audioInputStream
-    - Clip clip
-    - File soundFile
-    + SoundClip(File soundFile, String soundName)
-    + SoundClip(String filePath, String soundName)
-    + String getSoundName()
-    + AudioInputStream getAudioInputStream()
-    + Clip getSoundClip()
-    + File getSoundFile()
-    + void setSoundClipName(String soundName)
-    + void update(String subscriberName)
-    + void stopSound()
-    + String toString()
+	- String soundName
+	- AudioInputStream audioInputStream
+	- Clip clip
+	- File soundFile
+	+ SoundClip(File soundFile, String soundName)
+	+ SoundClip(String filePath, String soundName)
+	+ getSoundName() String
+	+ getAudioInputStream() AudioInputStream
+	+ getSoundClip() Clip
+	+ getSoundFile() File
+	+ setSoundClipName() void
+	+ update(String subscriberName) void
+	+ stopSound() void
+	+ toString() String
 }
 
 Model o-- SoundClip
+Model ..> File
+SoundClip ..> AudioInputStream
+SoundClip ..> Clip
+SoundClip ..> File
 ```
 
 - The Model and SoundClip use the observer design pattern.
 	- The rationale for this pattern is to make it easy to play the correct sound when the user clicks the button corresponding to that sound.
 - The SoundClip class is responsible for actually loading the sound file and playing it.
+
+### View
+
+```mermaid
+classDiagram
+
+class IView {
+	+ short DEFAULT_WIDTH
+	+ short DEFAULT_WEIGHT
+	+ short DEFAULT_SOUND_COUNT
+	+ short DEFAULT_BUTTON_GRID_HEIGHT
+	+ short DEFAULT_BUTTON_GRID_WIDTH
+	+ String WINDOW_TITLE
+	+ showMainFrame() void*
+	+ addSoundButton(Object buttonListener, String soundName) void*
+	+ deleteSoundButton(String soundButtonName) void*
+	+ showAboutDialog() void*
+	+ showDocumentationDialog() void*
+	+ nameSoundButtonDialog() String*
+	+ loadPresetFile() String*
+	+ savePresetFile() File*
+	+ newSoundFilePath() File*
+	+ showErrorDialog(String errorMessage) void*
+	+ addNewSoundListener(Object newSoundButtonListener) void*
+	+ addDeleteSoundListener(Object deleteSoundButtonListener) void*
+	+ addAboutDialogListener(Object aboutOptionListener) void*
+	+ addDocumentationListener(Object docOptionListener) void*
+	+ addSavePresetListener(Object saveOptionListener) void*
+	+ addLoadPresetListener(Ojbect loadOptionListener) void*
+}
+class View {
+	- JMenuBar menuBar
+	- JMenu menu
+	- JMenuItem openPresetOption
+	- JMenuItem savePresetOption
+	- JMenuItem addSoundOption
+	- JMenuItem deleteSoundOption
+	- JMenuItem docOption
+	- JMenuItem aboutOption
+	- JPanel buttonPanel
+	- JButton buttons
+	- GridLayout buttonLayout
+	+ View()
+}
+class AboutDialog {
+	- short DEFAULT_WIDTH
+	- short DEFAULT_HEIGHT
+	- String applicationTitle
+	- String authorAndCopyright
+	- String versionNumber
+	+ AboutDialog()
+}
+class DocumentationDialog
+class NameSoundDialog {
+	- short DEFAULT_WIDTH
+	- short DEFAULT_HEIGHT
+	- short TEXT_FIELD_COLUMNS
+	- JTextField textField
+	- String sondName
+	- boolean confirmation
+	+ NameSoundDialog(JFrame mainFrame)
+	+ getTextFieldContent() String
+	+ getConfirmation() boolean
+}
+class okButtonListener {
+	+ actionPerformed(ActionEvent event) void
+}
+class cancelButtonListener {
+	+ actionPerformed(ActionEvent event) void
+}
+
+IView <|-- View
+JFrame <-- View
+View *-- NameSoundDialog
+JDialog <-- AboutDialog
+JDialog <-- DocumentationDialog
+JDialog <-- NameSoundDialog
+NameSoundDialog *-- okButtonListener
+NameSoundDialog *-- cancelButtonListener
+ActionListener <| -- okButtonListener
+ActionListener <| -- cancelButtonListener
+```
