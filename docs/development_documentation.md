@@ -1,19 +1,49 @@
 **Table of Conetents**
 
 - [Introduction](#introduction)
+- [Contributing Guidelines](#contributing-guidelines)
+- [Style Guide](#style-guide)
 - [Build Guide](#build-guide)
 - [Design](#design)
 	- [MVC Architecture ](#mvc-architecture )
 		- [Model](#model)
 		- [View](#view)
 		- [Controller](#controller)
-- [Contributing Guidelines](#contributing-guidelines)
+- [Tips](#tips)
 
 - - -
 
 # Introduction
 
 This document contains most of the important information related to JSoundBoard including how to build the application, the design, and development conventions.
+
+# Contributing Guidelines
+
+When you contribute code, be sure to describe what you did as clearly as you can. Also, you must follow this procedure:
+
+- If you are tackling an issue, generate a branch from that issue's page and assign yourself to the issue.
+	- Assigning yourself to the issue helps to keep track who is doing what.
+- When you feel you are finished, be sure to use the keywords `closes`, `resolves`, or `fixes` follow by a pound sign with the issue number (i.e. `#42`).
+	- This will automatically close the issue once a pull request has been completed.
+		- **Ex:** `This commit closes #42 <add more description to your commit>.`
+	- **DO NOT MERGE INTO THE MAIN BRANCH.**
+	- Push your branch to the remote repo.
+- On GitHub, make a pull request to merge the branch that contains your work.
+	- This gives a chance for someone to check your work and test it before merging it to the main branch.
+
+# Style Guide
+
+The following is the styling guidelines for this project. Please try to follow them as best you can.
+
+- Variables and class names use *nouns*.
+	- Variable names start with a lower case letter.
+	- Class names start with a upper case letter.
+- Method names use *verbs* and are camel case, starting with a lower case letter.
+- Length of methods aren't limited, but try your best to not make them unreasonably long.
+- Use tabs, not spaces for indentation.
+	- As for tab length, that's personal preference.
+- Use comments to describe things that are hard to understand.
+- Follow Java Doc conventions for your methods.
 
 # Build Guide
 
@@ -260,16 +290,8 @@ ActionLilstener <|-- SoundButtonListene
 - The listeners don't really have much in them because `ActionListener` is an interface with one method they need to implement.
 	- the exception is `SoundButtonListener`, and that's because that object will last as long as that sound is used in the application.
 
-# Contributing Guidelines
+# Tips
 
-When you contribute code, be sure to describe what you did as clearly as you can. Also, you must follow this procedure:
-
-- If you are tackling an issue, generate a branch from that issue's page and assign yourself to the issue.
-	- Assigning yourself to the issue helps to keep track who is doing what.
-- When you feel you are finished, be sure to use the keywords `closes`, `resolves`, or `fixes` follow by a pound sign with the issue number (i.e. `#42`).
-	- This will automatically close the issue once a pull request has been completed.
-		- **Ex:** `This commit closes #42 <add more description to your commit>.`
-	- **DO NOT MERGE INTO MAIN.**
-	- Push your branch to the remote repo.
-- On GitHub, make a pull request to merge the branch that contains your work.
-	- This gives a chance for someone to check your work and test it before merging it to the main branch.
+- Be sure to pull before you start doing your work each. This helps to make sure your local repo is up to date.
+- If you see that the `main` branch has new commits, merge it into the branch(es) you're currently working.
+	- This helps reduce merge conflicts later.
